@@ -144,9 +144,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
           height: 80.0,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white.withValues(alpha: 0.2),
             border: Border.all(
-              color: Colors.white.withOpacity(0.5),
+              color: Colors.white.withValues(alpha: 0.5),
               width: 2.0,
             ),
           ),
@@ -179,7 +179,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
           'A community of passionate runners pushing each other to reach new heights!',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white.withOpacity(0.8),
+                color: Colors.white.withValues(alpha: 0.8),
               ),
         ),
       ],
@@ -199,7 +199,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withOpacity(0.8),
+                color: Colors.white.withValues(alpha: 0.8),
               ),
         ),
       ],
@@ -271,7 +271,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     height: 8.0,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                   ),
@@ -281,7 +281,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     height: 8.0,
                     width: MediaQuery.of(context).size.width * 0.65 * 0.76, // 76% of card width (accounting for padding)
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                   ),
@@ -328,7 +328,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
         vertical: 6.0,
       ),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: Row(
@@ -460,7 +460,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   height: 40.0,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                   ),
                   child: Center(
                     child: Text(
@@ -491,7 +491,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                           Text(
                             ' completed a ',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white.withOpacity(0.8),
+                                  color: Colors.white.withValues(alpha: 0.8),
                                 ),
                           ),
                           Text(
@@ -516,7 +516,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                           Text(
                             timeAgo,
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Colors.white.withOpacity(0.6),
+                                  color: Colors.white.withValues(alpha: 0.6),
                                 ),
                           ),
                         ],
@@ -544,13 +544,13 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               height: 200.0,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.1),
+                color: Colors.white.withValues(alpha: 0.1),
                 border: Border(
                   top: BorderSide(
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                   ),
                   bottom: BorderSide(
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                   ),
                 ),
               ),
@@ -558,7 +558,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 child: Icon(
                   Icons.image,
                   size: 48.0,
-                  color: Colors.white.withOpacity(0.3),
+                  color: Colors.white.withValues(alpha: 0.3),
                 ),
               ),
             ),
@@ -718,7 +718,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
         roleColor = Colors.lightBlueAccent;
         break;
       default:
-        roleColor = Colors.white.withOpacity(0.8);
+        roleColor = Colors.white.withValues(alpha: 0.8);
     }
     
     return GlassmorphicCard(
@@ -733,7 +733,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
             height: 24.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
             ),
             child: Center(
               child: Text(
@@ -754,7 +754,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
             height: 40.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
             ),
             child: Center(
               child: Text(
@@ -790,7 +790,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                         vertical: 2.0,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Text(
@@ -807,7 +807,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 Text(
                   stats,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                       ),
                 ),
               ],
@@ -977,7 +977,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     vertical: 4.0,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Text(
@@ -1242,7 +1242,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 height: 40.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                 ),
                 child: const Center(
                   child: Icon(
@@ -1266,7 +1266,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     Text(
                       goal,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withOpacity(0.8),
+                            color: Colors.white.withValues(alpha: 0.8),
                           ),
                     ),
                   ],
@@ -1278,7 +1278,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   vertical: 4.0,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Text(
@@ -1326,7 +1326,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     height: 8.0,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                   ),
@@ -1336,7 +1336,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     height: 8.0,
                     width: MediaQuery.of(context).size.width * progress * 0.76, // Accounting for padding
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                   ),
@@ -1438,12 +1438,12 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 height: 40.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                 ),
                 child: Center(
                   child: Icon(
                     Icons.emoji_events_outlined,
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                   ),
                 ),
               ),
@@ -1462,7 +1462,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     Text(
                       goal,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withOpacity(0.8),
+                            color: Colors.white.withValues(alpha: 0.8),
                           ),
                     ),
                   ],
@@ -1474,7 +1474,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   vertical: 4.0,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Text(

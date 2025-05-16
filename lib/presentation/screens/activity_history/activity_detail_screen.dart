@@ -26,7 +26,8 @@ class ActivityDetailScreen extends StatefulWidget {
 
 class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
   int _selectedTabIndex = 0;
-  final SocialTier _userTier = SocialTier.clan; // Would normally come from a provider
+  final SocialTier _userTier =
+      SocialTier.clan; // Would normally come from a provider
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +40,11 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.blue.shade600,
-                  Colors.indigo.shade800,
-                ],
+                colors: [Colors.blue.shade600, Colors.indigo.shade800],
               ),
             ),
           ),
-          
+
           // Main content
           SafeArea(
             child: CustomScrollView(
@@ -59,9 +57,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                   title: Text(
                     widget.type,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -82,7 +80,7 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                     ),
                   ],
                 ),
-                
+
                 // Map and key metrics
                 SliverToBoxAdapter(
                   child: Padding(
@@ -90,7 +88,7 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                     child: _buildMapAndKeyMetrics(context),
                   ),
                 ),
-                
+
                 // Tabs
                 SliverToBoxAdapter(
                   child: Padding(
@@ -98,7 +96,7 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                     child: _buildTabs(context),
                   ),
                 ),
-                
+
                 // Tab content
                 SliverToBoxAdapter(
                   child: Padding(
@@ -106,7 +104,7 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                     child: _buildTabContent(context),
                   ),
                 ),
-                
+
                 // Social section
                 SliverToBoxAdapter(
                   child: Padding(
@@ -114,11 +112,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                     child: _buildSocialSection(context),
                   ),
                 ),
-                
+
                 // Bottom spacing
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 24.0),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
               ],
             ),
           ),
@@ -141,7 +137,7 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
               Container(
                 height: 200.0,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16.0),
                   ),
@@ -150,20 +146,20 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                   child: Icon(
                     Icons.map,
                     size: 48.0,
-                    color: Colors.white.withOpacity(0.5),
+                    color: Colors.white.withValues(alpha: 0.5),
                   ),
                 ),
               ),
-              
+
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Row(
                   children: [
                     Text(
                       'Route',
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleSmall?.copyWith(color: Colors.white),
                     ),
                     const Spacer(),
                     const Icon(
@@ -174,9 +170,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                     const SizedBox(width: 4.0),
                     Text(
                       'Central Park Loop',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                     ),
                   ],
                 ),
@@ -184,9 +180,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
             ],
           ),
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Key metrics
         Row(
           children: [
@@ -238,20 +234,22 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 decoration: BoxDecoration(
-                  color: _selectedTabIndex == 0
-                      ? Colors.white.withOpacity(0.2)
-                      : Colors.transparent,
+                  color:
+                      _selectedTabIndex == 0
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : Colors.transparent,
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Center(
                   child: Text(
                     'Stats',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: _selectedTabIndex == 0
+                      color: Colors.white,
+                      fontWeight:
+                          _selectedTabIndex == 0
                               ? FontWeight.bold
                               : FontWeight.normal,
-                        ),
+                    ),
                   ),
                 ),
               ),
@@ -267,20 +265,22 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 decoration: BoxDecoration(
-                  color: _selectedTabIndex == 1
-                      ? Colors.white.withOpacity(0.2)
-                      : Colors.transparent,
+                  color:
+                      _selectedTabIndex == 1
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : Colors.transparent,
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Center(
                   child: Text(
                     'Splits',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: _selectedTabIndex == 1
+                      color: Colors.white,
+                      fontWeight:
+                          _selectedTabIndex == 1
                               ? FontWeight.bold
                               : FontWeight.normal,
-                        ),
+                    ),
                   ),
                 ),
               ),
@@ -296,20 +296,22 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 decoration: BoxDecoration(
-                  color: _selectedTabIndex == 2
-                      ? Colors.white.withOpacity(0.2)
-                      : Colors.transparent,
+                  color:
+                      _selectedTabIndex == 2
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : Colors.transparent,
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Center(
                   child: Text(
                     'Charts',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: _selectedTabIndex == 2
+                      color: Colors.white,
+                      fontWeight:
+                          _selectedTabIndex == 2
                               ? FontWeight.bold
                               : FontWeight.normal,
-                        ),
+                    ),
                   ),
                 ),
               ),
@@ -341,13 +343,13 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
           Text(
             'Detailed Statistics',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           _buildStatRow(context, 'Avg. Heart Rate', '148', 'bpm'),
           _buildDivider(),
           _buildStatRow(context, 'Max Heart Rate', '172', 'bpm'),
@@ -359,22 +361,22 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
           _buildStatRow(context, 'Calories', '234', 'kcal'),
           _buildDivider(),
           _buildStatRow(context, 'Avg. Stride Length', '1.08', 'm'),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Heart rate zones (simplified)
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Heart Rate Zones',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall?.copyWith(color: Colors.white),
               ),
-              
+
               const SizedBox(height: 8.0),
-              
+
               SizedBox(
                 height: 24.0,
                 child: Row(
@@ -383,7 +385,7 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                       flex: 10,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.blue.shade300.withOpacity(0.8),
+                          color: Colors.blue.shade300.withValues(alpha: 0.8),
                           borderRadius: const BorderRadius.horizontal(
                             left: Radius.circular(4.0),
                           ),
@@ -393,26 +395,26 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                     Expanded(
                       flex: 25,
                       child: Container(
-                        color: Colors.green.shade400.withOpacity(0.8),
+                        color: Colors.green.shade400.withValues(alpha: 0.8),
                       ),
                     ),
                     Expanded(
                       flex: 40,
                       child: Container(
-                        color: Colors.yellow.shade600.withOpacity(0.8),
+                        color: Colors.yellow.shade600.withValues(alpha: 0.8),
                       ),
                     ),
                     Expanded(
                       flex: 20,
                       child: Container(
-                        color: Colors.orange.shade600.withOpacity(0.8),
+                        color: Colors.orange.shade600.withValues(alpha: 0.8),
                       ),
                     ),
                     Expanded(
                       flex: 5,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.red.shade400.withOpacity(0.8),
+                          color: Colors.red.shade400.withValues(alpha: 0.8),
                           borderRadius: const BorderRadius.horizontal(
                             right: Radius.circular(4.0),
                           ),
@@ -422,29 +424,29 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                   ],
                 ),
               ),
-              
+
               const SizedBox(height: 4.0),
-              
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Easy',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white.withOpacity(0.8),
-                        ),
+                      color: Colors.white.withValues(alpha: 0.8),
+                    ),
                   ),
                   Text(
                     'Moderate',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white.withOpacity(0.8),
-                        ),
+                      color: Colors.white.withValues(alpha: 0.8),
+                    ),
                   ),
                   Text(
                     'Hard',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white.withOpacity(0.8),
-                        ),
+                      color: Colors.white.withValues(alpha: 0.8),
+                    ),
                   ),
                 ],
               ),
@@ -455,7 +457,12 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
     );
   }
 
-  Widget _buildStatRow(BuildContext context, String label, String value, String unit) {
+  Widget _buildStatRow(
+    BuildContext context,
+    String label,
+    String value,
+    String unit,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -463,25 +470,25 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
         children: [
           Text(
             label,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
           Row(
             children: [
               Text(
                 value,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(width: 2.0),
               Text(
                 unit,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white.withOpacity(0.8),
-                    ),
+                  color: Colors.white.withValues(alpha: 0.8),
+                ),
               ),
             ],
           ),
@@ -491,10 +498,7 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
   }
 
   Widget _buildDivider() {
-    return Container(
-      height: 1.0,
-      color: Colors.white.withOpacity(0.1),
-    );
+    return Container(height: 1.0, color: Colors.white.withValues(alpha: 0.1));
   }
 
   Widget _buildSplitsTab(BuildContext context) {
@@ -507,13 +511,13 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
           Text(
             'Split Times',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Table header
           Row(
             children: [
@@ -522,9 +526,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                 child: Text(
                   'KM',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white.withValues(alpha: 0.8),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Expanded(
@@ -533,9 +537,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                   'Split',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white.withValues(alpha: 0.8),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Expanded(
@@ -544,9 +548,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                   'Pace',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white.withValues(alpha: 0.8),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Expanded(
@@ -555,18 +559,18 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                   'HR',
                   textAlign: TextAlign.right,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white.withValues(alpha: 0.8),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 8.0),
           _buildDivider(),
           const SizedBox(height: 8.0),
-          
+
           // Split rows
           _buildSplitRow(context, '1', '05:21', '5:21', '145', isFastest: true),
           _buildDivider(),
@@ -577,9 +581,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
           _buildSplitRow(context, '4', '05:38', '5:38', '146'),
           _buildDivider(),
           _buildSplitRow(context, '5', '05:29', '5:29', '150'),
-          
+
           const SizedBox(height: 12.0),
-          
+
           // Legend
           Row(
             children: [
@@ -587,32 +591,32 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                 width: 12.0,
                 height: 12.0,
                 decoration: BoxDecoration(
-                  color: Colors.green.shade400.withOpacity(0.8),
+                  color: Colors.green.shade400.withValues(alpha: 0.8),
                   borderRadius: BorderRadius.circular(2.0),
                 ),
               ),
               const SizedBox(width: 4.0),
               Text(
                 'Fastest Split',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: Colors.white),
               ),
               const SizedBox(width: 12.0),
               Container(
                 width: 12.0,
                 height: 12.0,
                 decoration: BoxDecoration(
-                  color: Colors.red.shade400.withOpacity(0.8),
+                  color: Colors.red.shade400.withValues(alpha: 0.8),
                   borderRadius: BorderRadius.circular(2.0),
                 ),
               ),
               const SizedBox(width: 4.0),
               Text(
                 'Slowest Split',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: Colors.white),
               ),
             ],
           ),
@@ -632,11 +636,11 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
   }) {
     Color? rowColor;
     if (isFastest) {
-      rowColor = Colors.green.shade400.withOpacity(0.2);
+      rowColor = Colors.green.shade400.withValues(alpha: 0.2);
     } else if (isSlowest) {
-      rowColor = Colors.red.shade400.withOpacity(0.2);
+      rowColor = Colors.red.shade400.withValues(alpha: 0.2);
     }
-    
+
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: BoxDecoration(
@@ -649,9 +653,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
             flex: 2,
             child: Text(
               km,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.white),
             ),
           ),
           Expanded(
@@ -660,9 +664,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
               split,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           Expanded(
@@ -670,9 +674,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
             child: Text(
               pace,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.white),
             ),
           ),
           Expanded(
@@ -680,9 +684,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
             child: Text(
               hr,
               textAlign: TextAlign.right,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.white),
             ),
           ),
         ],
@@ -700,13 +704,13 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
           Text(
             'Performance Charts',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Chart selection
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -716,14 +720,14 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
               _buildChartTypeButton(context, 'Elevation', false),
             ],
           ),
-          
+
           const SizedBox(height: 24.0),
-          
+
           // Placeholder for chart
           Container(
             height: 200.0,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Center(
@@ -733,22 +737,22 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                   Icon(
                     Icons.show_chart,
                     size: 48.0,
-                    color: Colors.white.withOpacity(0.5),
+                    color: Colors.white.withValues(alpha: 0.5),
                   ),
                   const SizedBox(height: 8.0),
                   Text(
                     'Pace Chart',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                   ),
                 ],
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Stats under chart
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -763,28 +767,30 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
     );
   }
 
-  Widget _buildChartTypeButton(BuildContext context, String label, bool isSelected) {
+  Widget _buildChartTypeButton(
+    BuildContext context,
+    String label,
+    bool isSelected,
+  ) {
     return GestureDetector(
       onTap: () {
         // Switch chart
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12.0,
-          vertical: 8.0,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
         decoration: BoxDecoration(
-          color: isSelected
-              ? Colors.white.withOpacity(0.3)
-              : Colors.white.withOpacity(0.1),
+          color:
+              isSelected
+                  ? Colors.white.withValues(alpha: 0.3)
+                  : Colors.white.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white,
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              ),
+            color: Colors.white,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          ),
         ),
       ),
     );
@@ -796,16 +802,16 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withOpacity(0.8),
-              ),
+            color: Colors.white.withValues(alpha: 0.8),
+          ),
         ),
         const SizedBox(height: 4.0),
         Text(
           value,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );
@@ -821,27 +827,23 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
           Text(
             'Social',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Likes
           Row(
             children: [
-              const Icon(
-                Icons.favorite,
-                size: 18.0,
-                color: Colors.pinkAccent,
-              ),
+              const Icon(Icons.favorite, size: 18.0, color: Colors.pinkAccent),
               const SizedBox(width: 8.0),
               Text(
                 '12 likes',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.white),
               ),
               const Spacer(),
               GlassmorphicButton(
@@ -865,28 +867,28 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                     const SizedBox(width: 4.0),
                     Text(
                       'Like',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: Colors.white),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Comments
           Text(
             'Comments',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(color: Colors.white),
           ),
-          
+
           const SizedBox(height: 8.0),
-          
+
           // Comment list
           _buildCommentItem(
             context,
@@ -901,9 +903,9 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
             'Nice job on the hill segment.',
             '1 hour ago',
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Add comment
           Row(
             children: [
@@ -919,13 +921,11 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                     decoration: InputDecoration(
                       hintText: 'Add a comment...',
                       hintStyle: TextStyle(
-                        color: Colors.white.withOpacity(0.6),
+                        color: Colors.white.withValues(alpha: 0.6),
                       ),
                       border: InputBorder.none,
                     ),
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
@@ -940,11 +940,7 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                 onPressed: () {
                   // Send comment
                 },
-                child: const Icon(
-                  Icons.send,
-                  size: 18.0,
-                  color: Colors.white,
-                ),
+                child: const Icon(Icons.send, size: 18.0, color: Colors.white),
               ),
             ],
           ),
@@ -968,21 +964,21 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
           height: 32.0,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white.withOpacity(0.2),
+            color: Colors.white.withValues(alpha: 0.2),
           ),
           child: Center(
             child: Text(
               name[0],
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
-        
+
         const SizedBox(width: 8.0),
-        
+
         // Comment content
         Expanded(
           child: Column(
@@ -993,25 +989,25 @@ class _ActivityDetailScreenState extends State<ActivityDetailScreen> {
                   Text(
                     name,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const Spacer(),
                   Text(
                     timeAgo,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white.withOpacity(0.6),
-                        ),
+                      color: Colors.white.withValues(alpha: 0.6),
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 2.0),
               Text(
                 comment,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.white),
               ),
             ],
           ),

@@ -16,7 +16,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // This would normally come from a user provider
     const currentTier = SocialTier.clan;
-    
+
     return Scaffold(
       body: Stack(
         children: [
@@ -26,14 +26,11 @@ class DashboardScreen extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.blue.shade400,
-                  Colors.purple.shade300,
-                ],
+                colors: [Colors.blue.shade400, Colors.purple.shade300],
               ),
             ),
           ),
-          
+
           // Main content
           SafeArea(
             child: CustomScrollView(
@@ -45,7 +42,7 @@ class DashboardScreen extends StatelessWidget {
                     child: _buildHeaderSection(context, currentTier),
                   ),
                 ),
-                
+
                 // Activity overview
                 SliverToBoxAdapter(
                   child: Padding(
@@ -53,7 +50,7 @@ class DashboardScreen extends StatelessWidget {
                     child: _buildActivityOverview(context, currentTier),
                   ),
                 ),
-                
+
                 // Quick actions section
                 SliverToBoxAdapter(
                   child: Padding(
@@ -61,7 +58,7 @@ class DashboardScreen extends StatelessWidget {
                     child: _buildQuickActionsSection(context, currentTier),
                   ),
                 ),
-                
+
                 // Recent activities
                 SliverToBoxAdapter(
                   child: Padding(
@@ -69,7 +66,7 @@ class DashboardScreen extends StatelessWidget {
                     child: _buildRecentActivities(context),
                   ),
                 ),
-                
+
                 // Community feed
                 SliverToBoxAdapter(
                   child: Padding(
@@ -77,7 +74,7 @@ class DashboardScreen extends StatelessWidget {
                     child: _buildCommunityFeed(context, currentTier),
                   ),
                 ),
-                
+
                 // Future events
                 SliverToBoxAdapter(
                   child: Padding(
@@ -85,11 +82,9 @@ class DashboardScreen extends StatelessWidget {
                     child: _buildFutureEvents(context),
                   ),
                 ),
-                
+
                 // Bottom spacing
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 24.0),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
               ],
             ),
           ),
@@ -109,11 +104,11 @@ class DashboardScreen extends StatelessWidget {
             Text(
               'Welcome back, Alex',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            
+
             // Current status pill
             Container(
               padding: const EdgeInsets.symmetric(
@@ -121,33 +116,29 @@ class DashboardScreen extends StatelessWidget {
                 vertical: 6.0,
               ),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
-                    Icons.people,
-                    size: 16.0,
-                    color: Colors.white,
-                  ),
+                  const Icon(Icons.people, size: 16.0, color: Colors.white),
                   const SizedBox(width: 4.0),
                   Text(
                     tier.displayName,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
             ),
           ],
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Quick stats
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -166,25 +157,22 @@ class DashboardScreen extends StatelessWidget {
       opacity: 0.4,
       blur: 8.0,
       borderRadius: BorderRadius.circular(12.0),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12.0,
-        vertical: 8.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             value,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Text(
             label,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white.withOpacity(0.8),
-                ),
+              color: Colors.white.withValues(alpha: 0.8),
+            ),
           ),
         ],
       ),
@@ -207,7 +195,7 @@ class DashboardScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.white.withOpacity(0.1),
+                    color: Colors.white.withValues(alpha: 0.1),
                     blurRadius: 15.0,
                     spreadRadius: 2.0,
                   ),
@@ -218,37 +206,38 @@ class DashboardScreen extends StatelessWidget {
                   Text(
                     '26.4 km',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     'This Week',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white.withOpacity(0.8),
-                        ),
+                      color: Colors.white.withValues(alpha: 0.8),
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Calendar week view (simplified)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(7, (index) {
               final day = ['M', 'T', 'W', 'T', 'F', 'S', 'S'][index];
-              final hasActivity = [true, false, true, true, false, true, false][index];
-              
+              final hasActivity =
+                  [true, false, true, true, false, true, false][index];
+
               return Column(
                 children: [
                   Text(
                     day,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white.withOpacity(0.8),
-                        ),
+                      color: Colors.white.withValues(alpha: 0.8),
+                    ),
                   ),
                   const SizedBox(height: 4.0),
                   Container(
@@ -256,11 +245,12 @@ class DashboardScreen extends StatelessWidget {
                     height: 24.0,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: hasActivity
-                          ? Colors.white.withOpacity(0.3)
-                          : Colors.transparent,
+                      color:
+                          hasActivity
+                              ? Colors.white.withValues(alpha: 0.3)
+                              : Colors.transparent,
                       border: Border.all(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withValues(alpha: 0.5),
                         width: 1.0,
                       ),
                     ),
@@ -269,9 +259,9 @@ class DashboardScreen extends StatelessWidget {
               );
             }),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Weekly comparison bar chart (simplified)
           SizedBox(
             height: 100.0,
@@ -281,7 +271,7 @@ class DashboardScreen extends StatelessWidget {
               children: List.generate(4, (index) {
                 final labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
                 final heights = [65.0, 78.0, 69.0, 92.0];
-                
+
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -289,7 +279,7 @@ class DashboardScreen extends StatelessWidget {
                       width: 40.0,
                       height: heights[index],
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(4.0),
                       ),
                     ),
@@ -297,8 +287,8 @@ class DashboardScreen extends StatelessWidget {
                     Text(
                       labels[index],
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withOpacity(0.8),
-                          ),
+                        color: Colors.white.withValues(alpha: 0.8),
+                      ),
                     ),
                   ],
                 );
@@ -326,9 +316,7 @@ class DashboardScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const ActivityScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => const ActivityScreen()),
               );
             },
             child: const Icon(
@@ -338,9 +326,9 @@ class DashboardScreen extends StatelessWidget {
             ),
           ),
         ),
-        
+
         const SizedBox(height: 24.0),
-        
+
         // Quick action cards
         SizedBox(
           height: 100.0,
@@ -397,7 +385,11 @@ class DashboardScreen extends StatelessWidget {
   }
 
   Widget _buildQuickActionCard(
-      BuildContext context, String label, IconData icon, VoidCallback onTap) {
+    BuildContext context,
+    String label,
+    IconData icon,
+    VoidCallback onTap,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(right: 12.0),
       child: GlassmorphicCard(
@@ -413,18 +405,14 @@ class DashboardScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  icon,
-                  size: 32.0,
-                  color: Colors.white,
-                ),
+                Icon(icon, size: 32.0, color: Colors.white),
                 const SizedBox(height: 8.0),
                 Text(
                   label,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: Colors.white),
                 ),
               ],
             ),
@@ -444,22 +432,22 @@ class DashboardScreen extends StatelessWidget {
             Text(
               'Recent Activities',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(width: 8.0),
             Expanded(
               child: Container(
                 height: 1.0,
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withValues(alpha: 0.3),
               ),
             ),
           ],
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Activity timeline
         SizedBox(
           height: 180.0,
@@ -490,7 +478,7 @@ class DashboardScreen extends StatelessWidget {
             ],
           ),
         ),
-        
+
         // View all button
         Center(
           child: TextButton(
@@ -505,9 +493,9 @@ class DashboardScreen extends StatelessWidget {
             child: Text(
               'View All Activities',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -525,22 +513,22 @@ class DashboardScreen extends StatelessWidget {
             Text(
               'Community Feed',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(width: 8.0),
             Expanded(
               child: Container(
                 height: 1.0,
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withValues(alpha: 0.3),
               ),
             ),
           ],
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Community feed
         GlassmorphicCard(
           opacity: 0.5,
@@ -578,7 +566,7 @@ class DashboardScreen extends StatelessWidget {
             ],
           ),
         ),
-        
+
         // View community button
         Center(
           child: TextButton(
@@ -593,9 +581,9 @@ class DashboardScreen extends StatelessWidget {
             child: Text(
               'View Community',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -621,20 +609,20 @@ class DashboardScreen extends StatelessWidget {
             height: 40.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
             ),
             child: Center(
               child: Text(
                 name[0],
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
           const SizedBox(width: 12.0),
-          
+
           // Activity details
           Expanded(
             child: Column(
@@ -645,22 +633,22 @@ class DashboardScreen extends StatelessWidget {
                     Text(
                       name,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       ' completed a ',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white.withOpacity(0.8),
-                          ),
+                        color: Colors.white.withValues(alpha: 0.8),
+                      ),
                     ),
                     Text(
                       activityType,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -669,29 +657,29 @@ class DashboardScreen extends StatelessWidget {
                     Text(
                       distance,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(width: 8.0),
                     Text(
                       timeAgo,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withOpacity(0.6),
-                          ),
+                        color: Colors.white.withValues(alpha: 0.6),
+                      ),
                     ),
                     const Spacer(),
                     Icon(
                       Icons.favorite,
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                       size: 14.0,
                     ),
                     const SizedBox(width: 4.0),
                     Text(
                       likes,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withOpacity(0.8),
-                          ),
+                        color: Colors.white.withValues(alpha: 0.8),
+                      ),
                     ),
                   ],
                 ),
@@ -704,10 +692,7 @@ class DashboardScreen extends StatelessWidget {
   }
 
   Widget _buildDivider() {
-    return Container(
-      height: 1.0,
-      color: Colors.white.withOpacity(0.1),
-    );
+    return Container(height: 1.0, color: Colors.white.withValues(alpha: 0.1));
   }
 
   Widget _buildFutureEvents(BuildContext context) {
@@ -720,22 +705,22 @@ class DashboardScreen extends StatelessWidget {
             Text(
               'Upcoming Events',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(width: 8.0),
             Expanded(
               child: Container(
                 height: 1.0,
-                color: Colors.white.withOpacity(0.3),
+                color: Colors.white.withValues(alpha: 0.3),
               ),
             ),
           ],
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Events carousel
         SizedBox(
           height: 140.0,
@@ -792,24 +777,24 @@ class DashboardScreen extends StatelessWidget {
               Text(
                 name,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8.0),
               Row(
                 children: [
                   Icon(
                     Icons.calendar_today,
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     size: 14.0,
                   ),
                   const SizedBox(width: 4.0),
                   Text(
                     dateTime,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: Colors.white),
                   ),
                 ],
               ),
@@ -818,15 +803,15 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.location_on,
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     size: 14.0,
                   ),
                   const SizedBox(width: 4.0),
                   Text(
                     location,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: Colors.white),
                   ),
                 ],
               ),
@@ -835,15 +820,15 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.people,
-                    color: Colors.white.withOpacity(0.8),
+                    color: Colors.white.withValues(alpha: 0.8),
                     size: 14.0,
                   ),
                   const SizedBox(width: 4.0),
                   Text(
                     participants,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: Colors.white),
                   ),
                 ],
               ),
@@ -863,9 +848,9 @@ class DashboardScreen extends StatelessWidget {
                   child: Text(
                     'Join',
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

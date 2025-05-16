@@ -114,7 +114,7 @@ class _RouteCreationScreenState extends State<RouteCreationScreen> {
           Container(
             height: 300.0,
             decoration: BoxDecoration(
-              color: Colors.white.withValues(opacity: 0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Stack(
@@ -127,7 +127,7 @@ class _RouteCreationScreenState extends State<RouteCreationScreen> {
                       Icon(
                         Icons.map,
                         size: 48.0,
-                        color: Colors.white.withValues(opacity: 0.5),
+                        color: Colors.white.withValues(alpha: 0.5),
                       ),
                       const SizedBox(height: 8.0),
                       Text(
@@ -214,7 +214,7 @@ class _RouteCreationScreenState extends State<RouteCreationScreen> {
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: Colors.white.withValues(opacity: 0.8),
+            color: Colors.white.withValues(alpha: 0.8),
           ),
         ),
       ],
@@ -240,12 +240,10 @@ class _RouteCreationScreenState extends State<RouteCreationScreen> {
           TextField(
             decoration: InputDecoration(
               labelText: 'Route Name',
-              labelStyle: TextStyle(
-                color: Colors.white.withValues(opacity: 0.8),
-              ),
+              labelStyle: TextStyle(color: Colors.white.withValues(alpha: 0.8)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.white.withValues(opacity: 0.3),
+                  color: Colors.white.withValues(alpha: 0.3),
                 ),
                 borderRadius: BorderRadius.circular(8.0),
               ),
@@ -263,12 +261,10 @@ class _RouteCreationScreenState extends State<RouteCreationScreen> {
           TextField(
             decoration: InputDecoration(
               labelText: 'Description (Optional)',
-              labelStyle: TextStyle(
-                color: Colors.white.withValues(opacity: 0.8),
-              ),
+              labelStyle: TextStyle(color: Colors.white.withValues(alpha: 0.8)),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Colors.white.withValues(opacity: 0.3),
+                  color: Colors.white.withValues(alpha: 0.3),
                 ),
                 borderRadius: BorderRadius.circular(8.0),
               ),
@@ -362,10 +358,10 @@ class _RouteCreationScreenState extends State<RouteCreationScreen> {
         decoration: BoxDecoration(
           color:
               isSelected
-                  ? Colors.white.withValues(opacity: 0.3)
+                  ? Colors.white.withValues(alpha: 0.3)
                   : Colors.transparent,
           borderRadius: BorderRadius.circular(16.0),
-          border: Border.all(color: Colors.white.withValues(opacity: 0.5)),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
         ),
         child: Text(
           label,
@@ -392,10 +388,10 @@ class _RouteCreationScreenState extends State<RouteCreationScreen> {
         decoration: BoxDecoration(
           color:
               isSelected
-                  ? Colors.white.withValues(opacity: 0.3)
+                  ? Colors.white.withValues(alpha: 0.3)
                   : Colors.transparent,
           borderRadius: BorderRadius.circular(16.0),
-          border: Border.all(color: Colors.white.withValues(opacity: 0.5)),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
         ),
         child: Text(
           label,
@@ -421,10 +417,10 @@ class _RouteCreationScreenState extends State<RouteCreationScreen> {
           color:
               isAddTag
                   ? Colors.transparent
-                  : Colors.white.withValues(opacity: 0.2),
+                  : Colors.white.withValues(alpha: 0.2),
           borderRadius: BorderRadius.circular(16.0),
           border: Border.all(
-            color: Colors.white.withValues(opacity: isAddTag ? 0.5 : 0.2),
+            color: Colors.white.withValues(alpha: isAddTag ? 0.5 : 0.2),
           ),
         ),
         child: Text(
