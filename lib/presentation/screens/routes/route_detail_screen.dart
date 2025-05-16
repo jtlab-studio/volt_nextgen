@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:volt_nextgen/core/constants/social_tier.dart';
-import 'package:volt_nextgen/presentation/screens/activity/activity_screen.dart';
+import 'package:volt_nextgen/presentation/screens/activity_history/activity_history_screen.dart';
 import 'package:volt_nextgen/presentation/widgets/glassmorphic/glassmorphic_button.dart';
 import 'package:volt_nextgen/presentation/widgets/glassmorphic/glassmorphic_card.dart';
 
@@ -699,7 +699,10 @@ class _RouteDetailScreenState extends State<RouteDetailScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ActivityScreen()),
+                // Changed from ActivityScreen to ActivityHistoryScreen
+                MaterialPageRoute(
+                  builder: (context) => const ActivityHistoryScreen(),
+                ),
               );
             },
             child: Row(

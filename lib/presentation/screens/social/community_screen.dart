@@ -11,9 +11,11 @@ class CommunityScreen extends StatefulWidget {
   State<CommunityScreen> createState() => _CommunityScreenState();
 }
 
-class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProviderStateMixin {
+class _CommunityScreenState extends State<CommunityScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final SocialTier _userTier = SocialTier.clan; // Would normally come from a provider
+  final SocialTier _userTier =
+      SocialTier.clan; // Would normally come from a provider
 
   @override
   void initState() {
@@ -38,14 +40,11 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.purple.shade700,
-                  Colors.indigo.shade800,
-                ],
+                colors: [Colors.purple.shade700, Colors.indigo.shade800],
               ),
             ),
           ),
-          
+
           // Main content
           SafeArea(
             child: NestedScrollView(
@@ -58,9 +57,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     title: Text(
                       'Volt Runners',
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     leading: IconButton(
                       icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -68,12 +67,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     ),
                     actions: [
                       IconButton(
-                        icon: const Icon(Icons.health_and_safety, color: Colors.white),
+                        icon: const Icon(
+                          Icons.health_and_safety,
+                          color: Colors.white,
+                        ),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const CommunityHealthScreen(),
+                              builder:
+                                  (context) => const CommunityHealthScreen(),
                             ),
                           );
                         },
@@ -91,7 +94,10 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                         opacity: 0.5,
                         blur: 8.0,
                         borderRadius: BorderRadius.zero,
-                        padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 0.0,
+                          horizontal: 8.0,
+                        ),
                         child: TabBar(
                           controller: _tabController,
                           indicatorColor: Colors.white,
@@ -151,16 +157,12 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
             ),
           ),
           child: const Center(
-            child: Icon(
-              Icons.bolt,
-              size: 40.0,
-              color: Colors.amber,
-            ),
+            child: Icon(Icons.bolt, size: 40.0, color: Colors.amber),
           ),
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Community details
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -172,15 +174,15 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
             _buildQuickStat(context, 'Tier', _userTier.displayName),
           ],
         ),
-        
+
         const SizedBox(height: 8.0),
-        
+
         Text(
           'A community of passionate runners pushing each other to reach new heights!',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white.withValues(alpha: 0.8),
-              ),
+            color: Colors.white.withValues(alpha: 0.8),
+          ),
         ),
       ],
     );
@@ -192,15 +194,15 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
         Text(
           value,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withValues(alpha: 0.8),
-              ),
+            color: Colors.white.withValues(alpha: 0.8),
+          ),
         ),
       ],
     );
@@ -217,13 +219,13 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
           Text(
             'Tier Status',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Tier benefits chips
           Wrap(
             spacing: 8.0,
@@ -235,9 +237,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               _buildBenefitChip(context, 'Member Roles'),
             ],
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Progress to next tier
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,22 +249,22 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 children: [
                   Text(
                     'Progress to Tribe',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleSmall?.copyWith(color: Colors.white),
                   ),
                   Text(
                     '65%',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 8.0),
-              
+
               // Progress bar
               Stack(
                 children: [
@@ -275,11 +277,14 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                   ),
-                  
+
                   // Progress
                   Container(
                     height: 8.0,
-                    width: MediaQuery.of(context).size.width * 0.65 * 0.76, // 76% of card width (accounting for padding)
+                    width:
+                        MediaQuery.of(context).size.width *
+                        0.65 *
+                        0.76, // 76% of card width (accounting for padding)
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.8),
                       borderRadius: BorderRadius.circular(4.0),
@@ -287,30 +292,36 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 12.0),
-              
+
               // Requirements checklist
               _buildRequirementItem(context, 'Active Members', '8/10', false),
-              _buildRequirementItem(context, 'Weekly Activities', '18/15', true),
-              _buildRequirementItem(context, 'Total Distance', '156/200 km', false),
-              
+              _buildRequirementItem(
+                context,
+                'Weekly Activities',
+                '18/15',
+                true,
+              ),
+              _buildRequirementItem(
+                context,
+                'Total Distance',
+                '156/200 km',
+                false,
+              ),
+
               const SizedBox(height: 8.0),
-              
+
               // Estimated timeline
               Row(
                 children: [
-                  const Icon(
-                    Icons.schedule,
-                    size: 16.0,
-                    color: Colors.white70,
-                  ),
+                  const Icon(Icons.schedule, size: 16.0, color: Colors.white70),
                   const SizedBox(width: 4.0),
                   Text(
                     'Estimated time to Tribe: 3 weeks',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white70,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: Colors.white70),
                   ),
                 ],
               ),
@@ -323,10 +334,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
 
   Widget _buildBenefitChip(BuildContext context, String label) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12.0,
-        vertical: 6.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(16.0),
@@ -334,24 +342,25 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.check_circle,
-            size: 14.0,
-            color: Colors.white,
-          ),
+          const Icon(Icons.check_circle, size: 14.0, color: Colors.white),
           const SizedBox(width: 4.0),
           Text(
             label,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: Colors.white),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildRequirementItem(BuildContext context, String label, String progress, bool isCompleted) {
+  Widget _buildRequirementItem(
+    BuildContext context,
+    String label,
+    String progress,
+    bool isCompleted,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
@@ -364,17 +373,17 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
           const SizedBox(width: 8.0),
           Text(
             label,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
           const Spacer(),
           Text(
             progress,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: isCompleted ? FontWeight.bold : FontWeight.normal,
-                ),
+              color: Colors.white,
+              fontWeight: isCompleted ? FontWeight.bold : FontWeight.normal,
+            ),
           ),
         ],
       ),
@@ -439,9 +448,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
     String distance,
     String timeAgo,
     String likes,
-    String? comment,
-    {bool hasImage = false},
-  ) {
+    String? comment, {
+    bool hasImage = false,
+  }) {
     return GlassmorphicCard(
       opacity: 0.5,
       blur: 8.0,
@@ -466,14 +475,14 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     child: Text(
                       name[0],
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(width: 12.0),
-                
+
                 // Activity details
                 Expanded(
                   child: Column(
@@ -483,23 +492,29 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                         children: [
                           Text(
                             name,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             ' completed a ',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.8),
-                                ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              color: Colors.white.withValues(alpha: 0.8),
+                            ),
                           ),
                           Text(
                             activityType,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
@@ -507,29 +522,30 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                         children: [
                           Text(
                             distance,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodySmall?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           const SizedBox(width: 8.0),
                           Text(
                             timeAgo,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.6),
-                                ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodySmall?.copyWith(
+                              color: Colors.white.withValues(alpha: 0.6),
+                            ),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ),
-                
+
                 IconButton(
-                  icon: const Icon(
-                    Icons.more_horiz,
-                    color: Colors.white,
-                  ),
+                  icon: const Icon(Icons.more_horiz, color: Colors.white),
                   onPressed: () {
                     // Show options
                   },
@@ -537,7 +553,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               ],
             ),
           ),
-          
+
           // Image if present
           if (hasImage)
             Container(
@@ -546,9 +562,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               decoration: BoxDecoration(
                 color: Colors.white.withValues(alpha: 0.1),
                 border: Border(
-                  top: BorderSide(
-                    color: Colors.white.withValues(alpha: 0.1),
-                  ),
+                  top: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
                   bottom: BorderSide(
                     color: Colors.white.withValues(alpha: 0.1),
                   ),
@@ -562,19 +576,19 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 ),
               ),
             ),
-          
+
           // Comment
           if (comment != null)
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Text(
                 comment,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.white),
               ),
             ),
-          
+
           // Interaction bar
           Padding(
             padding: const EdgeInsets.all(12.0),
@@ -595,16 +609,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                       const SizedBox(width: 4.0),
                       Text(
                         'Like',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.white,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodySmall?.copyWith(color: Colors.white),
                       ),
                     ],
                   ),
                 ),
-                
+
                 const SizedBox(width: 16.0),
-                
+
                 // Comment button
                 GestureDetector(
                   onTap: () {
@@ -620,16 +634,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                       const SizedBox(width: 4.0),
                       Text(
                         'Comment',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.white,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodySmall?.copyWith(color: Colors.white),
                       ),
                     ],
                   ),
                 ),
-                
+
                 const Spacer(),
-                
+
                 // Like count
                 Row(
                   children: [
@@ -641,9 +655,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     const SizedBox(width: 4.0),
                     Text(
                       likes,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: Colors.white),
                     ),
                   ],
                 ),
@@ -674,9 +688,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
         _buildMemberCard(context, 'Chris', 'Member', '43 km this month', 6),
         const SizedBox(height: 8.0),
         _buildMemberCard(context, 'Rachel', 'Member', '78 km this month', 7),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Add member button
         GlassmorphicButton(
           opacity: 0.6,
@@ -687,18 +701,14 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.person_add,
-                size: 18.0,
-                color: Colors.white,
-              ),
+              const Icon(Icons.person_add, size: 18.0, color: Colors.white),
               const SizedBox(width: 8.0),
               Text(
                 'Invite New Member',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -707,9 +717,15 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
     );
   }
 
-  Widget _buildMemberCard(BuildContext context, String name, String role, String stats, int rank) {
+  Widget _buildMemberCard(
+    BuildContext context,
+    String name,
+    String role,
+    String stats,
+    int rank,
+  ) {
     Color roleColor;
-    
+
     switch (role) {
       case 'Admin':
         roleColor = Colors.amber;
@@ -720,7 +736,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
       default:
         roleColor = Colors.white.withValues(alpha: 0.8);
     }
-    
+
     return GlassmorphicCard(
       opacity: 0.5,
       blur: 8.0,
@@ -739,15 +755,15 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               child: Text(
                 '#${rank + 1}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-          
+
           const SizedBox(width: 12.0),
-          
+
           // Avatar
           Container(
             width: 40.0,
@@ -760,15 +776,15 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               child: Text(
                 name[0],
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-          
+
           const SizedBox(width: 12.0),
-          
+
           // Details
           Expanded(
             child: Column(
@@ -779,9 +795,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     Text(
                       name,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(width: 8.0),
                     Container(
@@ -796,9 +812,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                       child: Text(
                         role,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: roleColor,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          color: roleColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -807,19 +823,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 Text(
                   stats,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withValues(alpha: 0.8),
-                      ),
+                    color: Colors.white.withValues(alpha: 0.8),
+                  ),
                 ),
               ],
             ),
           ),
-          
+
           // Actions
           IconButton(
-            icon: const Icon(
-              Icons.message,
-              color: Colors.white,
-            ),
+            icon: const Icon(Icons.message, color: Colors.white),
             onPressed: () {
               // Message user
             },
@@ -840,9 +853,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
             Text(
               'Upcoming Events',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             GlassmorphicButton(
               opacity: 0.4,
@@ -857,26 +870,22 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               },
               child: Row(
                 children: [
-                  const Icon(
-                    Icons.add,
-                    size: 16.0,
-                    color: Colors.white,
-                  ),
+                  const Icon(Icons.add, size: 16.0, color: Colors.white),
                   const SizedBox(width: 4.0),
                   Text(
                     'Create',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: Colors.white),
                   ),
                 ],
               ),
             ),
           ],
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Events
         _buildEventCard(
           context,
@@ -904,20 +913,20 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
           '15 participants',
           'Long run for everyone training for the upcoming marathon.',
         ),
-        
+
         const SizedBox(height: 24.0),
-        
+
         // Past events header
         Text(
           'Past Events',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Past events
         _buildEventCard(
           context,
@@ -965,9 +974,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 child: Text(
                   name,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               if (!isPast)
@@ -983,16 +992,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   child: Text(
                     'Going',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
             ],
           ),
-          
+
           const SizedBox(height: 12.0),
-          
+
           // Details
           Row(
             children: [
@@ -1004,64 +1013,56 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               const SizedBox(width: 8.0),
               Text(
                 dateTime,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.white),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 6.0),
-          
+
           Row(
             children: [
-              const Icon(
-                Icons.location_on,
-                size: 16.0,
-                color: Colors.white70,
-              ),
+              const Icon(Icons.location_on, size: 16.0, color: Colors.white70),
               const SizedBox(width: 8.0),
               Text(
                 location,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.white),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 6.0),
-          
+
           Row(
             children: [
-              const Icon(
-                Icons.people,
-                size: 16.0,
-                color: Colors.white70,
-              ),
+              const Icon(Icons.people, size: 16.0, color: Colors.white70),
               const SizedBox(width: 8.0),
               Text(
                 participants,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.white),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 12.0),
-          
+
           // Description
           Text(
             description,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
-          
+
           if (!isPast) ...[
             const SizedBox(height: 16.0),
-            
+
             // Action buttons
             Row(
               children: [
@@ -1069,18 +1070,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   child: GlassmorphicButton(
                     opacity: 0.4,
                     blur: 5.0,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8.0,
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     onPressed: () {
                       // View details
                     },
                     child: Text(
                       'Details',
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -1089,18 +1088,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   child: GlassmorphicButton(
                     opacity: 0.4,
                     blur: 5.0,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8.0,
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
                     onPressed: () {
                       // Share
                     },
                     child: Text(
                       'Share',
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -1123,9 +1120,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
             Text(
               'Active Challenges',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             GlassmorphicButton(
               opacity: 0.4,
@@ -1140,26 +1137,22 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               },
               child: Row(
                 children: [
-                  const Icon(
-                    Icons.add,
-                    size: 16.0,
-                    color: Colors.white,
-                  ),
+                  const Icon(Icons.add, size: 16.0, color: Colors.white),
                   const SizedBox(width: 4.0),
                   Text(
                     'Create',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: Colors.white),
                   ),
                 ],
               ),
             ),
           ],
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Active challenges
         _buildChallengeCard(
           context,
@@ -1182,20 +1175,20 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
           '#5 of 8 participants',
           'Take on those hills and reach the 1000m elevation gain goal!',
         ),
-        
+
         const SizedBox(height: 24.0),
-        
+
         // Available challenges header
         Text(
           'Available Challenges',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Available challenges
         _buildAvailableChallengeCard(
           context,
@@ -1245,10 +1238,7 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   color: Colors.white.withValues(alpha: 0.2),
                 ),
                 child: const Center(
-                  child: Icon(
-                    Icons.emoji_events,
-                    color: Colors.amber,
-                  ),
+                  child: Icon(Icons.emoji_events, color: Colors.amber),
                 ),
               ),
               const SizedBox(width: 12.0),
@@ -1259,15 +1249,15 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     Text(
                       name,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       goal,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.8),
-                          ),
+                        color: Colors.white.withValues(alpha: 0.8),
+                      ),
                     ),
                   ],
                 ),
@@ -1283,16 +1273,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 ),
                 child: Text(
                   timeLeft,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: Colors.white),
                 ),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Progress
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1302,22 +1292,22 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 children: [
                   Text(
                     'Progress',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                   ),
                   Text(
                     progressText,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 8.0),
-              
+
               // Progress bar
               Stack(
                 children: [
@@ -1330,11 +1320,14 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                   ),
-                  
+
                   // Progress
                   Container(
                     height: 8.0,
-                    width: MediaQuery.of(context).size.width * progress * 0.76, // Accounting for padding
+                    width:
+                        MediaQuery.of(context).size.width *
+                        progress *
+                        0.76, // Accounting for padding
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.8),
                       borderRadius: BorderRadius.circular(4.0),
@@ -1342,31 +1335,31 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 8.0),
-              
+
               // Ranking
               Text(
                 ranking,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: Colors.white),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 12.0),
-          
+
           // Description
           Text(
             description,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Action buttons
           Row(
             children: [
@@ -1374,18 +1367,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 child: GlassmorphicButton(
                   opacity: 0.4,
                   blur: 5.0,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   onPressed: () {
                     // View leaderboard
                   },
                   child: Text(
                     'Leaderboard',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                   ),
                 ),
               ),
@@ -1394,18 +1385,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 child: GlassmorphicButton(
                   opacity: 0.4,
                   blur: 5.0,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   onPressed: () {
                     // View details
                   },
                   child: Text(
                     'Details',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                   ),
                 ),
               ),
@@ -1455,15 +1444,15 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                     Text(
                       name,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     Text(
                       goal,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white.withValues(alpha: 0.8),
-                          ),
+                        color: Colors.white.withValues(alpha: 0.8),
+                      ),
                     ),
                   ],
                 ),
@@ -1479,16 +1468,16 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                 ),
                 child: Text(
                   difficulty,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: Colors.white),
                 ),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 12.0),
-          
+
           // Reward
           Row(
             children: [
@@ -1500,32 +1489,30 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
               const SizedBox(width: 8.0),
               Text(
                 'Reward: $reward',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.white),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 12.0),
-          
+
           // Description
           Text(
             description,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Join button
           GlassmorphicButton(
             opacity: 0.5,
             blur: 5.0,
-            padding: const EdgeInsets.symmetric(
-              vertical: 8.0,
-            ),
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             onPressed: () {
               // Join challenge
             },
@@ -1542,9 +1529,9 @@ class _CommunityScreenState extends State<CommunityScreen> with SingleTickerProv
                   'Join Challenge',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ],
             ),

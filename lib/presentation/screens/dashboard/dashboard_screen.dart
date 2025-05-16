@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:volt_nextgen/core/constants/social_tier.dart';
 import 'package:volt_nextgen/presentation/screens/activity_history/activity_history_screen.dart';
-import 'package:volt_nextgen/presentation/screens/activity/activity_screen.dart';
 import 'package:volt_nextgen/presentation/screens/routes/route_creation_screen.dart';
 import 'package:volt_nextgen/presentation/screens/social/community_screen.dart';
 import 'package:volt_nextgen/presentation/widgets/activity_card.dart';
 import 'package:volt_nextgen/presentation/widgets/glassmorphic/glassmorphic_button.dart';
 import 'package:volt_nextgen/presentation/widgets/glassmorphic/glassmorphic_card.dart';
-import 'package:volt_nextgen/presentation/widgets/glassmorphic/glassmorphic_container.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -314,10 +312,12 @@ class DashboardScreen extends StatelessWidget {
             isCircular: true,
             padding: EdgeInsets.zero,
             onPressed: () {
-              // Fix for ActivityScreen
+              // Navigate to ActivityHistoryScreen instead
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ActivityScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const ActivityHistoryScreen(),
+                ),
               );
             },
             child: const Icon(
@@ -606,9 +606,9 @@ class DashboardScreen extends StatelessWidget {
     String distance,
     String timeAgo,
     String likes,
-    String? comment,
-    {bool hasImage = false},
-  ) {
+    String? comment, {
+    bool hasImage = false,
+  }) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Row(
