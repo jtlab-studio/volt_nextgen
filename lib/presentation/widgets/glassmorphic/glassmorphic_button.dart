@@ -36,19 +36,22 @@ class GlassmorphicButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final borderColor = isDarkMode
-        ? GlassmorphicColors.darkGlassBorder
-        : GlassmorphicColors.lightGlassBorder;
+    final borderColor =
+        isDarkMode
+            ? GlassmorphicColors.darkGlassBorder
+            : GlassmorphicColors.lightGlassBorder;
 
-    final effectiveTintColor = tier != null
-        ? (isDarkMode
-            ? GlassmorphicColors.getDarkTierTint(tier!)
-            : GlassmorphicColors.getLightTierTint(tier!))
-        : null;
+    final effectiveTintColor =
+        tier != null
+            ? (isDarkMode
+                ? GlassmorphicColors.getDarkTierTint(tier!)
+                : GlassmorphicColors.getLightTierTint(tier!))
+            : null;
 
-    final effectiveBorderRadius = isCircular
-        ? BorderRadius.circular(height != null ? height! / 2 : 100)
-        : borderRadius;
+    final effectiveBorderRadius =
+        isCircular
+            ? BorderRadius.circular(height != null ? height! / 2 : 100)
+            : borderRadius;
 
     return Material(
       color: Colors.transparent,
@@ -57,10 +60,12 @@ class GlassmorphicButton extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         borderRadius: effectiveBorderRadius,
-        splashColor: effectiveTintColor?.withOpacity(0.3) ??
-            Colors.white.withOpacity(0.3),
-        highlightColor: effectiveTintColor?.withOpacity(0.2) ??
-            Colors.white.withOpacity(0.1),
+        splashColor:
+            effectiveTintColor?.withValues(alpha: 0.3) ??
+            Colors.white.withValues(alpha: 0.3),
+        highlightColor:
+            effectiveTintColor?.withValues(alpha: 0.2) ??
+            Colors.white.withValues(alpha: 0.1),
         child: ClipRRect(
           borderRadius: effectiveBorderRadius,
           child: BackdropFilter(
@@ -73,17 +78,19 @@ class GlassmorphicButton extends StatelessWidget {
                 color: (isDarkMode
                         ? GlassmorphicColors.darkGlassBackground
                         : GlassmorphicColors.lightGlassBackground)
-                    .withOpacity(opacity),
+                    .withValues(alpha: opacity),
                 borderRadius: effectiveBorderRadius,
-                border: hasBorder
-                    ? Border.all(
-                        color: borderColor,
-                        width: GlassmorphicProperties.buttonBorderWidth,
-                      )
-                    : null,
-                gradient: isDarkMode
-                    ? GlassmorphicProperties.getDarkGradient()
-                    : GlassmorphicProperties.getLightGradient(),
+                border:
+                    hasBorder
+                        ? Border.all(
+                          color: borderColor,
+                          width: GlassmorphicProperties.buttonBorderWidth,
+                        )
+                        : null,
+                gradient:
+                    isDarkMode
+                        ? GlassmorphicProperties.getDarkGradient()
+                        : GlassmorphicProperties.getLightGradient(),
               ),
               child: Center(child: child),
             ),

@@ -11,9 +11,10 @@ class CommunityHealthScreen extends StatefulWidget {
 }
 
 class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
-  final SocialTier _userTier = SocialTier.clan; // Would normally come from a provider
+  final SocialTier _userTier =
+      SocialTier.clan; // Would normally come from a provider
   int _selectedTabIndex = 0;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,14 +26,11 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.purple.shade700,
-                  Colors.indigo.shade800,
-                ],
+                colors: [Colors.purple.shade700, Colors.indigo.shade800],
               ),
             ),
           ),
-          
+
           // Main content
           SafeArea(
             child: CustomScrollView(
@@ -45,9 +43,9 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
                   title: Text(
                     'Community Health',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -62,7 +60,7 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
                     ),
                   ],
                 ),
-                
+
                 // Health status
                 SliverToBoxAdapter(
                   child: Padding(
@@ -70,7 +68,7 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
                     child: _buildHealthStatus(context),
                   ),
                 ),
-                
+
                 // Tab selector
                 SliverToBoxAdapter(
                   child: Padding(
@@ -78,7 +76,7 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
                     child: _buildTabSelector(context),
                   ),
                 ),
-                
+
                 // Tab content
                 SliverToBoxAdapter(
                   child: Padding(
@@ -86,7 +84,7 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
                     child: _buildTabContent(context),
                   ),
                 ),
-                
+
                 // Action items
                 SliverToBoxAdapter(
                   child: Padding(
@@ -94,11 +92,9 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
                     child: _buildActionItems(context),
                   ),
                 ),
-                
+
                 // Bottom spacing
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 24.0),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
               ],
             ),
           ),
@@ -130,15 +126,15 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               Text(
                 'Excellent Health',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Health meters
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -148,16 +144,16 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               _buildHealthMeter(context, 'Engagement', 0.71),
             ],
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Status description
           Text(
             'Your community is thriving with regular activities and good engagement. Keep building momentum towards the Tribe tier!',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
         ],
       ),
@@ -174,7 +170,7 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
     } else {
       meterColor = Colors.red;
     }
-    
+
     return Column(
       children: [
         // Circular progress
@@ -189,42 +185,42 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
                 height: 60.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                 ),
               ),
-              
+
               // Progress
               Positioned.fill(
                 child: CircularProgressIndicator(
                   value: value,
-                  backgroundColor: Colors.white.withOpacity(0.1),
+                  backgroundColor: Colors.white.withValues(alpha: 0.1),
                   valueColor: AlwaysStoppedAnimation<Color>(meterColor),
                   strokeWidth: 8.0,
                 ),
               ),
-              
+
               // Percentage text
               Center(
                 child: Text(
                   '${(value * 100).toInt()}%',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        
+
         const SizedBox(height: 8.0),
-        
+
         // Label
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: Colors.white),
         ),
       ],
     );
@@ -247,20 +243,22 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 decoration: BoxDecoration(
-                  color: _selectedTabIndex == 0
-                      ? Colors.white.withOpacity(0.2)
-                      : Colors.transparent,
+                  color:
+                      _selectedTabIndex == 0
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : Colors.transparent,
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Center(
                   child: Text(
                     'Activity Metrics',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: _selectedTabIndex == 0
+                      color: Colors.white,
+                      fontWeight:
+                          _selectedTabIndex == 0
                               ? FontWeight.bold
                               : FontWeight.normal,
-                        ),
+                    ),
                   ),
                 ),
               ),
@@ -276,20 +274,22 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 decoration: BoxDecoration(
-                  color: _selectedTabIndex == 1
-                      ? Colors.white.withOpacity(0.2)
-                      : Colors.transparent,
+                  color:
+                      _selectedTabIndex == 1
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : Colors.transparent,
                   borderRadius: BorderRadius.circular(12.0),
                 ),
                 child: Center(
                   child: Text(
                     'Member Analysis',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: _selectedTabIndex == 1
+                      color: Colors.white,
+                      fontWeight:
+                          _selectedTabIndex == 1
                               ? FontWeight.bold
                               : FontWeight.normal,
-                        ),
+                    ),
                   ),
                 ),
               ),
@@ -318,18 +318,18 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
           Text(
             'Weekly Activity Trends',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Chart placeholder
           Container(
             height: 200.0,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Center(
@@ -339,22 +339,22 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
                   Icon(
                     Icons.show_chart,
                     size: 48.0,
-                    color: Colors.white.withOpacity(0.5),
+                    color: Colors.white.withValues(alpha: 0.5),
                   ),
                   const SizedBox(height: 8.0),
                   Text(
                     'Activity Trend Chart',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                   ),
                 ],
               ),
             ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Activity stats
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -364,19 +364,19 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               _buildActivityStat(context, 'Average', '18', ''),
             ],
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Activity breakdown
           Text(
             'Activity Breakdown',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(color: Colors.white),
           ),
-          
+
           const SizedBox(height: 8.0),
-          
+
           // Activity types (simplified pie chart)
           Row(
             children: [
@@ -394,17 +394,11 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               ),
               Expanded(
                 flex: 2,
-                child: Container(
-                  height: 16.0,
-                  color: Colors.green,
-                ),
+                child: Container(height: 16.0, color: Colors.green),
               ),
               Expanded(
                 flex: 1,
-                child: Container(
-                  height: 16.0,
-                  color: Colors.orange,
-                ),
+                child: Container(height: 16.0, color: Colors.orange),
               ),
               Expanded(
                 flex: 1,
@@ -420,9 +414,9 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               ),
             ],
           ),
-          
+
           const SizedBox(height: 8.0),
-          
+
           // Legend
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -438,36 +432,46 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
     );
   }
 
-  Widget _buildActivityStat(BuildContext context, String label, String value, String change) {
+  Widget _buildActivityStat(
+    BuildContext context,
+    String label,
+    String value,
+    String change,
+  ) {
     return Column(
       children: [
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withOpacity(0.8),
-              ),
+            color: Colors.white.withValues(alpha: 0.8),
+          ),
         ),
         const SizedBox(height: 4.0),
         Text(
           value,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         if (change.isNotEmpty)
           Text(
             change,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
+            ),
           ),
       ],
     );
   }
 
-  Widget _buildLegendItem(BuildContext context, String label, Color color, String percentage) {
+  Widget _buildLegendItem(
+    BuildContext context,
+    String label,
+    Color color,
+    String percentage,
+  ) {
     return Row(
       children: [
         Container(
@@ -481,9 +485,9 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
         const SizedBox(width: 4.0),
         Text(
           '$label ($percentage)',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: Colors.white),
         ),
       ],
     );
@@ -499,13 +503,13 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
           Text(
             'Member Activity',
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Member grid (simplified)
           GridView.count(
             shrinkWrap: true,
@@ -524,62 +528,69 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               _buildMemberCell(context, 'R', 'High', Colors.green),
             ],
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Activity distribution
           Text(
             'Activity Distribution',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(color: Colors.white),
           ),
-          
+
           const SizedBox(height: 8.0),
-          
+
           // Activity bars
           Column(
             children: [
               _buildActivityBar(context, 'High Activity', 0.375, Colors.green),
               const SizedBox(height: 8.0),
-              _buildActivityBar(context, 'Medium Activity', 0.375, Colors.orange),
+              _buildActivityBar(
+                context,
+                'Medium Activity',
+                0.375,
+                Colors.orange,
+              ),
               const SizedBox(height: 8.0),
               _buildActivityBar(context, 'Low Activity', 0.25, Colors.red),
             ],
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Retention info
           Text(
             'Member Retention: Excellent',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(color: Colors.white),
           ),
-          
+
           const SizedBox(height: 8.0),
-          
+
           Text(
             'Your community has 100% retention over the past 30 days. No members have left the group.',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildMemberCell(BuildContext context, String initial, String activity, Color color) {
+  Widget _buildMemberCell(
+    BuildContext context,
+    String initial,
+    String activity,
+    Color color,
+  ) {
     return Container(
       decoration: BoxDecoration(
-        color: color.withOpacity(0.2),
+        color: color.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(
-          color: color.withOpacity(0.5),
-          width: 1.0,
-        ),
+        border: Border.all(color: color.withValues(alpha: 0.5), width: 1.0),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -589,40 +600,45 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
             height: 32.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
             ),
             child: Center(
               child: Text(
                 initial,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
           const SizedBox(height: 4.0),
           Text(
             activity,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: Colors.white),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildActivityBar(BuildContext context, String label, double value, Color color) {
+  Widget _buildActivityBar(
+    BuildContext context,
+    String label,
+    double value,
+    Color color,
+  ) {
     return Row(
       children: [
         SizedBox(
           width: 120.0,
           child: Text(
             label,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: Colors.white),
           ),
         ),
         Expanded(
@@ -632,17 +648,20 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
               Container(
                 height: 16.0,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  color: Colors.white.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
-              
+
               // Progress
               Container(
                 height: 16.0,
-                width: MediaQuery.of(context).size.width * value * 0.5, // Approximate width
+                width:
+                    MediaQuery.of(context).size.width *
+                    value *
+                    0.5, // Approximate width
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.7),
+                  color: color.withValues(alpha: 0.7),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),
@@ -653,9 +672,9 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
         Text(
           '${(value * 100).toInt()}%',
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );
@@ -668,13 +687,13 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
         Text(
           'Recommended Actions',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         GlassmorphicCard(
           opacity: 0.4,
           blur: 8.0,
@@ -706,9 +725,9 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
             ],
           ),
         ),
-        
+
         const SizedBox(height: 24.0),
-        
+
         // Generate report button
         GlassmorphicButton(
           opacity: 0.6,
@@ -719,18 +738,14 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.summarize,
-                size: 18.0,
-                color: Colors.white,
-              ),
+              const Icon(Icons.summarize, size: 18.0, color: Colors.white),
               const SizedBox(width: 8.0),
               Text(
                 'Generate Health Report',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -755,13 +770,10 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
             width: 40.0,
             height: 40.0,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
+              color: color.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Icon(
-              icon,
-              color: color,
-            ),
+            child: Icon(icon, color: color),
           ),
           const SizedBox(width: 12.0),
           Expanded(
@@ -771,24 +783,21 @@ class _CommunityHealthScreenState extends State<CommunityHealthScreen> {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 4.0),
                 Text(
                   description,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                 ),
               ],
             ),
           ),
-          const Icon(
-            Icons.chevron_right,
-            color: Colors.white,
-          ),
+          const Icon(Icons.chevron_right, color: Colors.white),
         ],
       ),
     );

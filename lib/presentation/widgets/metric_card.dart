@@ -37,7 +37,7 @@ class MetricCard extends StatelessWidget {
                 if (icon != null) ...[
                   Icon(
                     icon,
-                    color: color ?? Colors.white.withOpacity(0.8),
+                    color: color ?? Colors.white.withValues(alpha: 0.8),
                     size: 14.0,
                   ),
                   const SizedBox(width: 4.0),
@@ -45,14 +45,14 @@ class MetricCard extends StatelessWidget {
                 Text(
                   label,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
-                      ),
+                    color: Colors.white.withValues(alpha: 0.8),
+                  ),
                 ),
               ],
             ),
-            
+
             const SizedBox(height: 8.0),
-            
+
             // Value
             Row(
               crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -61,19 +61,19 @@ class MetricCard extends StatelessWidget {
                 Text(
                   value,
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: isLarge ? 28.0 : 20.0,
-                        fontFamily: 'monospace',
-                      ),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: isLarge ? 28.0 : 20.0,
+                    fontFamily: 'monospace',
+                  ),
                 ),
                 if (unit != null) ...[
                   const SizedBox(width: 2.0),
                   Text(
                     unit!,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white.withOpacity(0.8),
-                        ),
+                      color: Colors.white.withValues(alpha: 0.8),
+                    ),
                   ),
                 ],
               ],

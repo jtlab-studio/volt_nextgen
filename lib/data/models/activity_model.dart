@@ -1,12 +1,6 @@
 import 'package:latlong2/latlong.dart';
 
-enum ActivityType {
-  run,
-  walk,
-  bike,
-  hike,
-  other,
-}
+enum ActivityType { run, walk, bike, hike, other }
 
 extension ActivityTypeExtension on ActivityType {
   String get displayName {
@@ -60,39 +54,39 @@ class ActivityModel {
 
   String get pace {
     if (distance <= 0) return '--:--';
-    
+
     final paceSeconds = duration / distance;
     final minutes = (paceSeconds / 60).floor();
     final seconds = (paceSeconds % 60).floor();
-    
+
     return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 
   // Returns elevation gain in meters
   double get elevationGain {
     double gain = 0;
-    
+
     for (int i = 1; i < metrics.elevationData.length; i++) {
       final diff = metrics.elevationData[i] - metrics.elevationData[i - 1];
       if (diff > 0) {
         gain += diff;
       }
     }
-    
+
     return gain;
   }
 
   // Returns elevation loss in meters
   double get elevationLoss {
     double loss = 0;
-    
+
     for (int i = 1; i < metrics.elevationData.length; i++) {
       final diff = metrics.elevationData[i - 1] - metrics.elevationData[i];
       if (diff > 0) {
         loss += diff;
       }
     }
-    
+
     return loss;
   }
 
@@ -106,23 +100,31 @@ class ActivityModel {
       duration: json['duration'] as int,
       distance: json['distance'] as double,
       routeId: json['routeId'] as String?,
-      gpsTrace: (json['gpsTrace'] as List<dynamic>)
-          .map((e) => LatLng(
-                (e as Map<String, dynamic>)['latitude'] as double,
-                (e as Map<String, dynamic>)['longitude'] as double,
-              ))
-          .toList(),
+      gpsTrace:
+          (json['gpsTrace'] as List<dynamic>)
+              .map(
+                (e) => LatLng(
+                  (e as Map<String, dynamic>)['latitude'],
+                  (e as Map<String, dynamic>)['longitude'],
+                ),
+              )
+              .toList(),
       isPublic: json['isPublic'] as bool,
-      metrics: ActivityMetrics.fromJson(json['metrics'] as Map<String, dynamic>),
-      laps: (json['laps'] as List<dynamic>)
-          .map((e) => LapData.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      likedByUserIds: (json['likedByUserIds'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      comments: (json['comments'] as List<dynamic>)
-          .map((e) => CommentModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      metrics: ActivityMetrics.fromJson(
+        json['metrics'] as Map<String, dynamic>,
+      ),
+      laps:
+          (json['laps'] as List<dynamic>)
+              .map((e) => LapData.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      likedByUserIds:
+          (json['likedByUserIds'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList(),
+      comments:
+          (json['comments'] as List<dynamic>)
+              .map((e) => CommentModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
     );
   }
 
@@ -136,12 +138,10 @@ class ActivityModel {
       'duration': duration,
       'distance': distance,
       'routeId': routeId,
-      'gpsTrace': gpsTrace
-          .map((e) => {
-                'latitude': e.latitude,
-                'longitude': e.longitude,
-              })
-          .toList(),
+      'gpsTrace':
+          gpsTrace
+              .map((e) => {'latitude': e.latitude, 'longitude': e.longitude})
+              .toList(),
       'isPublic': isPublic,
       'metrics': metrics.toJson(),
       'laps': laps.map((e) => e.toJson()).toList(),
@@ -214,20 +214,22 @@ class ActivityMetrics {
 
   factory ActivityMetrics.fromJson(Map<String, dynamic> json) {
     return ActivityMetrics(
-      heartRateData: (json['heartRateData'] as List<dynamic>)
-          .map((e) => e as int)
-          .toList(),
-      cadenceData: (json['cadenceData'] as List<dynamic>)
-          .map((e) => e as int)
-          .toList(),
-      elevationData: (json['elevationData'] as List<dynamic>)
-          .map((e) => e as double)
-          .toList(),
-      powerData: json['powerData'] != null
-          ? (json['powerData'] as List<dynamic>)
+      heartRateData:
+          (json['heartRateData'] as List<dynamic>)
               .map((e) => e as int)
-              .toList()
-          : null,
+              .toList(),
+      cadenceData:
+          (json['cadenceData'] as List<dynamic>).map((e) => e as int).toList(),
+      elevationData:
+          (json['elevationData'] as List<dynamic>)
+              .map((e) => e as double)
+              .toList(),
+      powerData:
+          json['powerData'] != null
+              ? (json['powerData'] as List<dynamic>)
+                  .map((e) => e as int)
+                  .toList()
+              : null,
       averageHeartRate: json['averageHeartRate'] as int?,
       maxHeartRate: json['maxHeartRate'] as int?,
       averageCadence: json['averageCadence'] as int?,
@@ -302,11 +304,11 @@ class LapData {
 
   String get pace {
     if (distance <= 0) return '--:--';
-    
+
     final paceSeconds = duration / distance;
     final minutes = (paceSeconds / 60).floor();
     final seconds = (paceSeconds % 60).floor();
-    
+
     return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 

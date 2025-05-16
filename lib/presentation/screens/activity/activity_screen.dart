@@ -14,9 +14,11 @@ class ActivityScreen extends StatefulWidget {
 
 class _ActivityScreenState extends State<ActivityScreen> {
   bool _isTracking = false;
-  int _elapsedSeconds = 0;
+  final int _elapsedSeconds =
+      0; // Changed to final as it doesn't appear to be modified
   int _selectedTabIndex = 0; // 0: Metrics, 1: Map
-  final SocialTier _userTier = SocialTier.clan; // Would normally come from a provider
+  final SocialTier _userTier =
+      SocialTier.clan; // Would normally come from a provider
 
   @override
   Widget build(BuildContext context) {
@@ -29,28 +31,26 @@ class _ActivityScreenState extends State<ActivityScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.indigo.shade500,
-                  Colors.purple.shade800,
-                ],
+                colors: [Colors.indigo.shade500, Colors.purple.shade800],
               ),
             ),
           ),
-          
+
           // Main content
           SafeArea(
             child: Column(
               children: [
                 // Sensor status bar
                 _buildSensorStatusBar(context),
-                
+
                 // Content tabs
                 Expanded(
-                  child: _isTracking
-                      ? _buildTabContent(context)
-                      : _buildPreStartState(context),
+                  child:
+                      _isTracking
+                          ? _buildTabContent(context)
+                          : _buildPreStartState(context),
                 ),
-                
+
                 // Control panel
                 _buildControlPanel(context),
               ],
@@ -66,10 +66,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
       opacity: 0.5,
       blur: 8.0,
       borderRadius: const BorderRadius.all(Radius.circular(0)),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 8.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -81,7 +78,11 @@ class _ActivityScreenState extends State<ActivityScreen> {
     );
   }
 
-  Widget _buildSensorStatus(BuildContext context, String label, bool isConnected) {
+  Widget _buildSensorStatus(
+    BuildContext context,
+    String label,
+    bool isConnected,
+  ) {
     return Row(
       children: [
         Container(
@@ -95,9 +96,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
         const SizedBox(width: 4.0),
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white,
-              ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: Colors.white),
         ),
       ],
     );
@@ -128,9 +129,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
               color: Colors.white,
             ),
           ),
-          
+
           const SizedBox(height: 32.0),
-          
+
           // Quick settings
           GlassmorphicCard(
             opacity: 0.6,
@@ -161,38 +162,36 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
   List<Widget> _buildActivityTypes(BuildContext context) {
     final activities = ['Run', 'Walk', 'Bike', 'Hike'];
-    final icons = [Icons.directions_run, Icons.directions_walk, Icons.directions_bike, Icons.terrain];
-    
+    final icons = [
+      Icons.directions_run,
+      Icons.directions_walk,
+      Icons.directions_bike,
+      Icons.terrain,
+    ];
+
     return List.generate(activities.length, (index) {
       final isSelected = index == 0; // Default to Run
-      
+
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: GlassmorphicButton(
           opacity: isSelected ? 0.7 : 0.5,
           blur: 8.0,
           borderRadius: BorderRadius.circular(16.0),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12.0,
-            vertical: 8.0,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
           onPressed: () {
             // Select activity type
           },
           child: Row(
             children: [
-              Icon(
-                icons[index],
-                size: 16.0,
-                color: Colors.white,
-              ),
+              Icon(icons[index], size: 16.0, color: Colors.white),
               const SizedBox(width: 4.0),
               Text(
                 activities[index],
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                    ),
+                  color: Colors.white,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                ),
               ),
             ],
           ),
@@ -207,25 +206,36 @@ class _ActivityScreenState extends State<ActivityScreen> {
       children: [
         _buildSettingToggle(context, 'Audio', Icons.volume_up, true),
         _buildSettingToggle(context, 'GPS', Icons.location_on, true),
-        _buildSettingToggle(context, 'Auto Pause', Icons.pause_circle_outline, false),
+        _buildSettingToggle(
+          context,
+          'Auto Pause',
+          Icons.pause_circle_outline,
+          false,
+        ),
       ],
     );
   }
 
-  Widget _buildSettingToggle(BuildContext context, String label, IconData icon, bool isEnabled) {
+  Widget _buildSettingToggle(
+    BuildContext context,
+    String label,
+    IconData icon,
+    bool isEnabled,
+  ) {
     return Column(
       children: [
         Icon(
           icon,
           size: 18.0,
-          color: isEnabled ? Colors.white : Colors.white.withOpacity(0.5),
+          color: isEnabled ? Colors.white : Colors.white.withValues(alpha: 0.5),
         ),
         const SizedBox(height: 4.0),
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: isEnabled ? Colors.white : Colors.white.withOpacity(0.5),
-              ),
+            color:
+                isEnabled ? Colors.white : Colors.white.withValues(alpha: 0.5),
+          ),
         ),
         Switch(
           value: isEnabled,
@@ -233,9 +243,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
             // Toggle setting
           },
           activeColor: Colors.white,
-          inactiveThumbColor: Colors.white.withOpacity(0.3),
-          activeTrackColor: Colors.white.withOpacity(0.3),
-          inactiveTrackColor: Colors.black.withOpacity(0.2),
+          inactiveThumbColor: Colors.white.withValues(alpha: 0.3),
+          activeTrackColor: Colors.white.withValues(alpha: 0.3),
+          inactiveTrackColor: Colors.black.withValues(alpha: 0.2),
         ),
       ],
     );
@@ -263,20 +273,24 @@ class _ActivityScreenState extends State<ActivityScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 12.0),
                       decoration: BoxDecoration(
-                        color: _selectedTabIndex == 0
-                            ? Colors.white.withOpacity(0.2)
-                            : Colors.transparent,
+                        color:
+                            _selectedTabIndex == 0
+                                ? Colors.white.withValues(alpha: 0.2)
+                                : Colors.transparent,
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Center(
                         child: Text(
                           'Metrics',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.white,
-                                fontWeight: _selectedTabIndex == 0
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                            fontWeight:
+                                _selectedTabIndex == 0
                                     ? FontWeight.bold
                                     : FontWeight.normal,
-                              ),
+                          ),
                         ),
                       ),
                     ),
@@ -292,20 +306,24 @@ class _ActivityScreenState extends State<ActivityScreen> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 12.0),
                       decoration: BoxDecoration(
-                        color: _selectedTabIndex == 1
-                            ? Colors.white.withOpacity(0.2)
-                            : Colors.transparent,
+                        color:
+                            _selectedTabIndex == 1
+                                ? Colors.white.withValues(alpha: 0.2)
+                                : Colors.transparent,
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Center(
                         child: Text(
                           'Map',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.white,
-                                fontWeight: _selectedTabIndex == 1
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                            fontWeight:
+                                _selectedTabIndex == 1
                                     ? FontWeight.bold
                                     : FontWeight.normal,
-                              ),
+                          ),
                         ),
                       ),
                     ),
@@ -315,12 +333,13 @@ class _ActivityScreenState extends State<ActivityScreen> {
             ),
           ),
         ),
-        
+
         // Tab content
         Expanded(
-          child: _selectedTabIndex == 0
-              ? _buildMetricsView(context)
-              : _buildMapView(context),
+          child:
+              _selectedTabIndex == 0
+                  ? _buildMetricsView(context)
+                  : _buildMapView(context),
         ),
       ],
     );
@@ -384,7 +403,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
         width: double.infinity,
         margin: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.1),
+          color: Colors.white.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(16.0),
         ),
         child: Column(
@@ -393,14 +412,14 @@ class _ActivityScreenState extends State<ActivityScreen> {
             Icon(
               Icons.map,
               size: 48.0,
-              color: Colors.white.withOpacity(0.5),
+              color: Colors.white.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 16.0),
             Text(
               'Map View',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.white,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.white),
             ),
           ],
         ),
@@ -413,16 +432,11 @@ class _ActivityScreenState extends State<ActivityScreen> {
       opacity: 0.7,
       blur: 10.0,
       borderRadius: const BorderRadius.all(Radius.circular(0)),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 16.0,
-      ),
-      child: _isTracking
-          ? _buildActiveControls(context)
-          : Container(
-              height: 48.0,
-              color: Colors.transparent,
-            ),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      child:
+          _isTracking
+              ? _buildActiveControls(context)
+              : Container(height: 48.0, color: Colors.transparent),
     );
   }
 
@@ -441,13 +455,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
           onPressed: () {
             // Add lap
           },
-          child: const Icon(
-            Icons.flag,
-            size: 24.0,
-            color: Colors.white,
-          ),
+          child: const Icon(Icons.flag, size: 24.0, color: Colors.white),
         ),
-        
+
         // Pause button
         GlassmorphicButton(
           opacity: 0.7,
@@ -461,22 +471,19 @@ class _ActivityScreenState extends State<ActivityScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ActivitySummaryScreen(
-                  distance: '2.45',
-                  time: '00:13:12',
-                  pace: '5:23',
-                  heartRate: '148',
-                ),
+                builder:
+                    (context) => ActivitySummaryScreen(
+                      distance: '2.45',
+                      time: '00:13:12',
+                      pace: '5:23',
+                      heartRate: '148',
+                    ),
               ),
             );
           },
-          child: const Icon(
-            Icons.stop,
-            size: 32.0,
-            color: Colors.white,
-          ),
+          child: const Icon(Icons.stop, size: 32.0, color: Colors.white),
         ),
-        
+
         // Lock button
         GlassmorphicButton(
           opacity: 0.6,
@@ -502,7 +509,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
     final hours = (_elapsedSeconds ~/ 3600).toString().padLeft(2, '0');
     final minutes = ((_elapsedSeconds % 3600) ~/ 60).toString().padLeft(2, '0');
     final seconds = (_elapsedSeconds % 60).toString().padLeft(2, '0');
-    
+
     return '$hours:$minutes:$seconds';
   }
 }

@@ -34,16 +34,18 @@ class GlassmorphicContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final borderColor = isDarkMode
-        ? GlassmorphicColors.darkGlassBorder
-        : GlassmorphicColors.lightGlassBorder;
+    final borderColor =
+        isDarkMode
+            ? GlassmorphicColors.darkGlassBorder
+            : GlassmorphicColors.lightGlassBorder;
 
     // Apply tier tint if specified
-    final effectiveTintColor = tier != null
-        ? (isDarkMode
-            ? GlassmorphicColors.getDarkTierTint(tier!)
-            : GlassmorphicColors.getLightTierTint(tier!))
-        : tintColor;
+    final effectiveTintColor =
+        tier != null
+            ? (isDarkMode
+                ? GlassmorphicColors.getDarkTierTint(tier!)
+                : GlassmorphicColors.getLightTierTint(tier!))
+            : tintColor;
 
     if (shape == BoxShape.circle) {
       return SizedBox(
@@ -57,17 +59,19 @@ class GlassmorphicContainer extends StatelessWidget {
                 color: (isDarkMode
                         ? GlassmorphicColors.darkGlassBackground
                         : GlassmorphicColors.lightGlassBackground)
-                    .withOpacity(opacity),
+                    .withValues(alpha: opacity),
                 shape: BoxShape.circle,
-                border: hasBorder
-                    ? Border.all(
-                        color: borderColor,
-                        width: GlassmorphicProperties.cardBorderWidth,
-                      )
-                    : null,
-                gradient: isDarkMode
-                    ? GlassmorphicProperties.getDarkGradient()
-                    : GlassmorphicProperties.getLightGradient(),
+                border:
+                    hasBorder
+                        ? Border.all(
+                          color: borderColor,
+                          width: GlassmorphicProperties.cardBorderWidth,
+                        )
+                        : null,
+                gradient:
+                    isDarkMode
+                        ? GlassmorphicProperties.getDarkGradient()
+                        : GlassmorphicProperties.getLightGradient(),
               ),
               child: Container(
                 // Apply a subtle tint overlay if applicable
@@ -95,17 +99,19 @@ class GlassmorphicContainer extends StatelessWidget {
                 color: (isDarkMode
                         ? GlassmorphicColors.darkGlassBackground
                         : GlassmorphicColors.lightGlassBackground)
-                    .withOpacity(opacity),
+                    .withValues(alpha: opacity),
                 borderRadius: borderRadius,
-                border: hasBorder
-                    ? Border.all(
-                        color: borderColor,
-                        width: GlassmorphicProperties.cardBorderWidth,
-                      )
-                    : null,
-                gradient: isDarkMode
-                    ? GlassmorphicProperties.getDarkGradient()
-                    : GlassmorphicProperties.getLightGradient(),
+                border:
+                    hasBorder
+                        ? Border.all(
+                          color: borderColor,
+                          width: GlassmorphicProperties.cardBorderWidth,
+                        )
+                        : null,
+                gradient:
+                    isDarkMode
+                        ? GlassmorphicProperties.getDarkGradient()
+                        : GlassmorphicProperties.getLightGradient(),
               ),
               child: Container(
                 // Apply a subtle tint overlay if applicable

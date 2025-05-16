@@ -65,17 +65,17 @@ class GlassmorphicColors {
   static Color getLightTierTint(SocialTier tier) {
     switch (tier) {
       case SocialTier.loneWolf:
-        return AppColors.loneWolfColor.withOpacity(0.08);
+        return AppColors.loneWolfColor.withValues(alpha: 0.08);
       case SocialTier.clan:
-        return AppColors.clanColor.withOpacity(0.1);
+        return AppColors.clanColor.withValues(alpha: 0.1);
       case SocialTier.tribe:
-        return AppColors.tribeColor.withOpacity(0.12);
+        return AppColors.tribeColor.withValues(alpha: 0.12);
       case SocialTier.chiefdom:
-        return AppColors.chiefdomColor.withOpacity(0.15);
+        return AppColors.chiefdomColor.withValues(alpha: 0.15);
       case SocialTier.state:
-        return AppColors.stateColor.withOpacity(0.12);
+        return AppColors.stateColor.withValues(alpha: 0.12);
       case SocialTier.nation:
-        return AppColors.nationColor.withOpacity(0.15);
+        return AppColors.nationColor.withValues(alpha: 0.15);
     }
   }
 
@@ -83,17 +83,17 @@ class GlassmorphicColors {
   static Color getDarkTierTint(SocialTier tier) {
     switch (tier) {
       case SocialTier.loneWolf:
-        return AppColors.loneWolfColor.withOpacity(0.2);
+        return AppColors.loneWolfColor.withValues(alpha: 0.2);
       case SocialTier.clan:
-        return AppColors.clanColor.withOpacity(0.2);
+        return AppColors.clanColor.withValues(alpha: 0.2);
       case SocialTier.tribe:
-        return AppColors.tribeColor.withOpacity(0.25);
+        return AppColors.tribeColor.withValues(alpha: 0.25);
       case SocialTier.chiefdom:
-        return AppColors.chiefdomColor.withOpacity(0.3);
+        return AppColors.chiefdomColor.withValues(alpha: 0.3);
       case SocialTier.state:
-        return AppColors.stateColor.withOpacity(0.25);
+        return AppColors.stateColor.withValues(alpha: 0.25);
       case SocialTier.nation:
-        return AppColors.nationColor.withOpacity(0.3);
+        return AppColors.nationColor.withValues(alpha: 0.3);
     }
   }
 }
@@ -123,16 +123,18 @@ class GlassmorphicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final borderColor = isDarkMode
-        ? GlassmorphicColors.darkGlassBorder
-        : GlassmorphicColors.lightGlassBorder;
+    final borderColor =
+        isDarkMode
+            ? GlassmorphicColors.darkGlassBorder
+            : GlassmorphicColors.lightGlassBorder;
 
     // Apply tier tint if specified
-    final effectiveTintColor = tier != null
-        ? (isDarkMode
-            ? GlassmorphicColors.getDarkTierTint(tier!)
-            : GlassmorphicColors.getLightTierTint(tier!))
-        : tintColor;
+    final effectiveTintColor =
+        tier != null
+            ? (isDarkMode
+                ? GlassmorphicColors.getDarkTierTint(tier!)
+                : GlassmorphicColors.getLightTierTint(tier!))
+            : tintColor;
 
     return ClipRRect(
       borderRadius: borderRadius,
@@ -143,17 +145,19 @@ class GlassmorphicCard extends StatelessWidget {
             color: (isDarkMode
                     ? GlassmorphicColors.darkGlassBackground
                     : GlassmorphicColors.lightGlassBackground)
-                .withOpacity(opacity),
+                .withValues(alpha: opacity),
             borderRadius: borderRadius,
-            border: hasBorder
-                ? Border.all(
-                    color: borderColor,
-                    width: GlassmorphicProperties.cardBorderWidth,
-                  )
-                : null,
-            gradient: isDarkMode
-                ? GlassmorphicProperties.getDarkGradient()
-                : GlassmorphicProperties.getLightGradient(),
+            border:
+                hasBorder
+                    ? Border.all(
+                      color: borderColor,
+                      width: GlassmorphicProperties.cardBorderWidth,
+                    )
+                    : null,
+            gradient:
+                isDarkMode
+                    ? GlassmorphicProperties.getDarkGradient()
+                    : GlassmorphicProperties.getLightGradient(),
           ),
           child: Container(
             // Apply a subtle tint overlay if applicable

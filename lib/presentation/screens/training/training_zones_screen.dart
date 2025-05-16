@@ -3,24 +3,17 @@ import 'package:volt_nextgen/core/constants/social_tier.dart';
 import 'package:volt_nextgen/presentation/widgets/glassmorphic/glassmorphic_button.dart';
 import 'package:volt_nextgen/presentation/widgets/glassmorphic/glassmorphic_card.dart';
 
-class TrainingZonesScreen extends StatefulWidget {
-  const TrainingZonesScreen({super.key});
+class SubscriptionScreen extends StatefulWidget {
+  const SubscriptionScreen({super.key});
 
   @override
-  State<TrainingZonesScreen> createState() => _TrainingZonesScreenState();
+  State<SubscriptionScreen> createState() => _SubscriptionScreenState();
 }
 
-class _TrainingZonesScreenState extends State<TrainingZonesScreen> {
-  final SocialTier _userTier = SocialTier.clan; // Would normally come from a provider
-  
-  int _selectedTabIndex = 0; // 0: HR, 1: Power, 2: Pace
-  bool _manualMode = false;
-  
-  // Sample data
-  final int _lthr = 172;
-  final int _criticalPower = 250;
-  final String _threshold5K = '5:30';
-  
+class _SubscriptionScreenState extends State<SubscriptionScreen> {
+  final SocialTier _userTier =
+      SocialTier.clan; // Would normally come from a provider
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,14 +25,11 @@ class _TrainingZonesScreenState extends State<TrainingZonesScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.blue.shade600,
-                  Colors.red.shade800,
-                ],
+                colors: [Colors.blue.shade600, Colors.purple.shade700],
               ),
             ),
           ),
-          
+
           // Main content
           SafeArea(
             child: CustomScrollView(
@@ -50,11 +40,11 @@ class _TrainingZonesScreenState extends State<TrainingZonesScreen> {
                   elevation: 0,
                   pinned: true,
                   title: Text(
-                    'Training Zones',
+                    'Subscription',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -69,39 +59,39 @@ class _TrainingZonesScreenState extends State<TrainingZonesScreen> {
                     ),
                   ],
                 ),
-                
-                // Threshold input section
+
+                // Current plan section
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: _buildThresholdSection(context),
+                    child: _buildCurrentPlanSection(context),
                   ),
                 ),
-                
-                // Zone config controls
+
+                // Social benefits
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: _buildZoneConfigControls(context),
+                    child: _buildSocialBenefitsSection(context),
                   ),
                 ),
-                
-                // Tab selector
+
+                // Upgrade pathways
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: _buildTabSelector(context),
+                    child: _buildUpgradePathwaysSection(context),
                   ),
                 ),
-                
-                // Zones visualization
+
+                // Community building tools
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: _buildZonesVisualization(context),
+                    child: _buildCommunityToolsSection(context),
                   ),
                 ),
-                
+
                 // Action buttons
                 SliverToBoxAdapter(
                   child: Padding(
@@ -109,11 +99,9 @@ class _TrainingZonesScreenState extends State<TrainingZonesScreen> {
                     child: _buildActionButtons(context),
                   ),
                 ),
-                
+
                 // Bottom spacing
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 24.0),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
               ],
             ),
           ),
@@ -122,7 +110,7 @@ class _TrainingZonesScreenState extends State<TrainingZonesScreen> {
     );
   }
 
-  Widget _buildThresholdSection(BuildContext context) {
+  Widget _buildCurrentPlanSection(BuildContext context) {
     return GlassmorphicCard(
       tier: _userTier,
       opacity: 0.6,
@@ -130,1094 +118,837 @@ class _TrainingZonesScreenState extends State<TrainingZonesScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Training Thresholds',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          
-          const SizedBox(height: 16.0),
-          
-          // LTHR input
+          // Tier badge
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.favorite,
-                          size: 18.0,
-                          color: Colors.redAccent,
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text(
-                          'Lactate Threshold Heart Rate (LTHR)',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.white,
-                              ),
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.info_outline,
-                            size: 16.0,
-                            color: Colors.white70,
-                          ),
-                          onPressed: () {
-                            // Show LTHR info
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8.0),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 8.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            '$_lthr',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            'bpm',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white.withOpacity(0.8),
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              GlassmorphicButton(
-                opacity: 0.4,
-                blur: 5.0,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 12.0,
-                ),
-                borderRadius: BorderRadius.circular(8.0),
-                onPressed: () {
-                  // Edit LTHR
-                },
-                child: const Icon(
-                  Icons.edit,
-                  size: 20.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          
-          const Divider(
-            color: Colors.white24,
-            height: 32.0,
-          ),
-          
-          // Critical Power input
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.flash_on,
-                          size: 18.0,
-                          color: Colors.amberAccent,
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text(
-                          'Critical Power / FTP',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.white,
-                              ),
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.info_outline,
-                            size: 16.0,
-                            color: Colors.white70,
-                          ),
-                          onPressed: () {
-                            // Show power info
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8.0),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 8.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            '$_criticalPower',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            'watts',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white.withOpacity(0.8),
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              GlassmorphicButton(
-                opacity: 0.4,
-                blur: 5.0,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 12.0,
-                ),
-                borderRadius: BorderRadius.circular(8.0),
-                onPressed: () {
-                  // Edit power
-                },
-                child: const Icon(
-                  Icons.edit,
-                  size: 20.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          
-          const Divider(
-            color: Colors.white24,
-            height: 32.0,
-          ),
-          
-          // 5K threshold pace
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.speed,
-                          size: 18.0,
-                          color: Colors.lightBlueAccent,
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text(
-                          'Threshold Pace (5K)',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.white,
-                              ),
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.info_outline,
-                            size: 16.0,
-                            color: Colors.white70,
-                          ),
-                          onPressed: () {
-                            // Show pace info
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8.0),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12.0,
-                        vertical: 8.0,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            _threshold5K,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                          const SizedBox(width: 4.0),
-                          Text(
-                            'min/km',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Colors.white.withOpacity(0.8),
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              GlassmorphicButton(
-                opacity: 0.4,
-                blur: 5.0,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12.0,
-                  vertical: 12.0,
-                ),
-                borderRadius: BorderRadius.circular(8.0),
-                onPressed: () {
-                  // Edit pace
-                },
-                child: const Icon(
-                  Icons.edit,
-                  size: 20.0,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Calculate button
-          GlassmorphicButton(
-            opacity: 0.5,
-            blur: 8.0,
-            padding: const EdgeInsets.symmetric(
-              vertical: 12.0,
-            ),
-            onPressed: () {
-              // Calculate from test
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.calculate,
-                  size: 18.0,
-                  color: Colors.white,
-                ),
-                const SizedBox(width: 8.0),
-                Text(
-                  'Calculate from Test',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildZoneConfigControls(BuildContext context) {
-    return GlassmorphicCard(
-      opacity: 0.5,
-      blur: 8.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Zone Configuration',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Number of zones selector
-          Row(
-            children: [
-              Text(
-                'Number of Zones',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
-              ),
-              const Spacer(),
               Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(8.0),
+                  color: Colors.white.withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(16.0),
                 ),
                 child: Row(
                   children: [
-                    IconButton(
-                      icon: const Icon(
-                        Icons.remove,
-                        color: Colors.white,
-                        size: 16.0,
-                      ),
-                      onPressed: () {
-                        // Decrease zones
-                      },
-                    ),
+                    const Icon(Icons.people, color: Colors.white, size: 20.0),
+                    const SizedBox(width: 8.0),
                     Text(
-                      '5',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                    IconButton(
-                      icon: const Icon(
-                        Icons.add,
+                      _userTier.displayName,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Colors.white,
-                        size: 16.0,
+                        fontWeight: FontWeight.bold,
                       ),
-                      onPressed: () {
-                        // Increase zones
-                      },
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Auto-calculate toggle
+
+          const SizedBox(height: 24.0),
+
+          // Plan details
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Auto-Calculate',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
-              ),
-              const Spacer(),
-              Switch(
-                value: !_manualMode,
-                onChanged: (value) {
-                  setState(() {
-                    _manualMode = !value;
-                  });
-                },
-                activeColor: Colors.white,
-                inactiveThumbColor: Colors.white.withOpacity(0.7),
-                activeTrackColor: Colors.green.withOpacity(0.5),
-                inactiveTrackColor: Colors.white.withOpacity(0.3),
-              ),
-            ],
-          ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Zone model selection
-          Row(
-            children: [
-              Text(
-                'Zone Model',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
-              ),
-              const Spacer(),
-              DropdownButton<String>(
-                value: 'Default',
-                dropdownColor: Colors.indigo.shade800,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
-                underline: Container(
-                  height: 1,
-                  color: Colors.white.withOpacity(0.5),
-                ),
-                icon: const Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.white,
-                ),
-                items: ['Default', 'Polarized', 'Friel', 'Custom']
-                    .map<DropdownMenuItem<String>>(
-                      (String value) => DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (String? value) {
-                  // Change zone model
-                },
-              ),
-            ],
-          ),
-          
-          const SizedBox(height: 8.0),
-          
-          // Last updated
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                'Last updated: May 10, 2025',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.white.withOpacity(0.6),
-                    ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTabSelector(BuildContext context) {
-    return GlassmorphicCard(
-      opacity: 0.5,
-      blur: 8.0,
-      padding: const EdgeInsets.all(4.0),
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _selectedTabIndex = 0;
-                });
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                decoration: BoxDecoration(
-                  color: _selectedTabIndex == 0
-                      ? Colors.white.withOpacity(0.2)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Center(
-                  child: Text(
-                    'Heart Rate',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: _selectedTabIndex == 0
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _selectedTabIndex = 1;
-                });
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                decoration: BoxDecoration(
-                  color: _selectedTabIndex == 1
-                      ? Colors.white.withOpacity(0.2)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Center(
-                  child: Text(
-                    'Power',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: _selectedTabIndex == 1
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _selectedTabIndex = 2;
-                });
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 12.0),
-                decoration: BoxDecoration(
-                  color: _selectedTabIndex == 2
-                      ? Colors.white.withOpacity(0.2)
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: Center(
-                  child: Text(
-                    'Pace',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: _selectedTabIndex == 2
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildZonesVisualization(BuildContext context) {
-    switch (_selectedTabIndex) {
-      case 0:
-        return _buildHeartRateZones(context);
-      case 1:
-        return _buildPowerZones(context);
-      case 2:
-        return _buildPaceZones(context);
-      default:
-        return _buildHeartRateZones(context);
-    }
-  }
-
-  Widget _buildHeartRateZones(BuildContext context) {
-    // Heart rate zones with colors from Z1 (blue) to Z5 (red)
-    final zoneColors = [
-      Colors.blue,
-      Colors.green,
-      Colors.yellow,
-      Colors.orange,
-      Colors.red,
-    ];
-    
-    final zoneNames = [
-      'Zone 1: Recovery',
-      'Zone 2: Endurance',
-      'Zone 3: Tempo',
-      'Zone 4: Threshold',
-      'Zone 5: VO2 Max',
-    ];
-    
-    final zoneRanges = [
-      '< 143 bpm',
-      '143 - 154 bpm',
-      '155 - 165 bpm',
-      '166 - 172 bpm',
-      '> 172 bpm',
-    ];
-    
-    return GlassmorphicCard(
-      opacity: 0.5,
-      blur: 10.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Heart Rate Zones',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Zones visualization
-          for (int i = 0; i < 5; i++)
-            _buildZoneRow(
-              context,
-              zoneNames[i],
-              zoneRanges[i],
-              zoneColors[i],
-              i == 3, // Threshold zone
-            ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Training benefits
-          Text(
-            'Training Benefits',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white,
-                ),
-          ),
-          
-          const SizedBox(height: 8.0),
-          
-          Container(
-            padding: const EdgeInsets.all(12.0),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Zone 1: Active recovery, improves fat metabolism',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                      ),
-                ),
-                const SizedBox(height: 4.0),
-                Text(
-                  'Zone 2: Builds aerobic endurance and efficiency',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                      ),
-                ),
-                const SizedBox(height: 4.0),
-                Text(
-                  'Zone 3: Improves aerobic capacity and lactate clearance',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                      ),
-                ),
-                const SizedBox(height: 4.0),
-                Text(
-                  'Zone 4: Raises lactate threshold and tolerance',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                      ),
-                ),
-                const SizedBox(height: 4.0),
-                Text(
-                  'Zone 5: Develops VO2 max and neuromuscular power',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white,
-                      ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPowerZones(BuildContext context) {
-    // Power zone colors
-    final zoneColors = [
-      Colors.blue,
-      Colors.green,
-      Colors.yellow,
-      Colors.orange,
-      Colors.red,
-      Colors.purple,
-      Colors.pink,
-    ];
-    
-    final zoneNames = [
-      'Zone 1: Active Recovery',
-      'Zone 2: Endurance',
-      'Zone 3: Tempo',
-      'Zone 4: Threshold',
-      'Zone 5: VO2 Max',
-      'Zone 6: Anaerobic',
-      'Zone 7: Neuromuscular',
-    ];
-    
-    final zoneRanges = [
-      '< 150W (< 60% FTP)',
-      '150 - 200W (60-80% FTP)',
-      '200 - 225W (80-90% FTP)',
-      '225 - 250W (90-100% FTP)',
-      '250 - 300W (100-120% FTP)',
-      '300 - 375W (120-150% FTP)',
-      '> 375W (> 150% FTP)',
-    ];
-    
-    return GlassmorphicCard(
-      opacity: 0.5,
-      blur: 10.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Power Zones',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Power zones visualization
-          for (int i = 0; i < 7; i++)
-            _buildZoneRow(
-              context,
-              zoneNames[i],
-              zoneRanges[i],
-              zoneColors[i],
-              i == 3, // Threshold zone
-            ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Power curve
-          Text(
-            'Power Curve',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white,
-                ),
-          ),
-          
-          const SizedBox(height: 8.0),
-          
-          // Power curve placeholder
-          Container(
-            height: 150.0,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
                 children: [
-                  Icon(
-                    Icons.show_chart,
-                    size: 48.0,
-                    color: Colors.white.withOpacity(0.5),
-                  ),
-                  const SizedBox(height: 8.0),
                   Text(
-                    'Power Curve Visualization',
+                    '\$9.99',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'per month',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                        ),
+                      color: Colors.white.withValues(alpha: 0.8),
+                    ),
                   ),
                 ],
               ),
+            ],
+          ),
+
+          const SizedBox(height: 16.0),
+
+          // Billing info
+          Container(
+            padding: const EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Column(
+              children: [
+                _buildInfoRow(
+                  context,
+                  'Billing Cycle',
+                  'Monthly',
+                  Icons.calendar_today,
+                ),
+                const SizedBox(height: 8.0),
+                _buildInfoRow(
+                  context,
+                  'Next Payment',
+                  'June 15, 2025',
+                  Icons.event,
+                ),
+                const SizedBox(height: 8.0),
+                _buildInfoRow(
+                  context,
+                  'Payment Method',
+                  '•••• 4242',
+                  Icons.credit_card,
+                ),
+              ],
             ),
           ),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildPaceZones(BuildContext context) {
-    // Pace zones with colors from Z1 (blue) to Z5 (red)
-    final zoneColors = [
-      Colors.blue,
-      Colors.green,
-      Colors.yellow,
-      Colors.orange,
-      Colors.red,
-    ];
-    
-    final zoneNames = [
-      'Zone 1: Easy',
-      'Zone 2: Endurance',
-      'Zone 3: Marathon',
-      'Zone 4: Threshold',
-      'Zone 5: Interval',
-    ];
-    
-    final zoneRanges = [
-      '> 6:35 /km',
-      '6:35 - 6:05 /km',
-      '6:05 - 5:45 /km',
-      '5:45 - 5:30 /km',
-      '< 5:30 /km',
-    ];
-    
-    return GlassmorphicCard(
-      opacity: 0.5,
-      blur: 10.0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Pace Zones',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-          ),
-          
           const SizedBox(height: 16.0),
-          
-          // Pace zones visualization
-          for (int i = 0; i < 5; i++)
-            _buildZoneRow(
+
+          // Tier description
+          Text(
+            _userTier.description,
+            textAlign: TextAlign.center,
+            style: Theme.of(
               context,
-              zoneNames[i],
-              zoneRanges[i],
-              zoneColors[i],
-              i == 3, // Threshold zone
-            ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Race equivalency
-          Text(
-            'Race Equivalency',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white,
-                ),
-          ),
-          
-          const SizedBox(height: 8.0),
-          
-          Container(
-            padding: const EdgeInsets.all(12.0),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildRaceEquivalent(context, '5K', '27:30'),
-                const SizedBox(height: 4.0),
-                _buildRaceEquivalent(context, '10K', '57:00'),
-                const SizedBox(height: 4.0),
-                _buildRaceEquivalent(context, 'Half Marathon', '2:05:00'),
-                const SizedBox(height: 4.0),
-                _buildRaceEquivalent(context, 'Marathon', '4:20:00'),
-              ],
-            ),
-          ),
-          
-          const SizedBox(height: 16.0),
-          
-          // Training paces
-          Text(
-            'Training Paces',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: Colors.white,
-                ),
-          ),
-          
-          const SizedBox(height: 8.0),
-          
-          Container(
-            padding: const EdgeInsets.all(12.0),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTrainingPace(context, 'Recovery Run', '7:00 - 7:30 /km'),
-                const SizedBox(height: 4.0),
-                _buildTrainingPace(context, 'Long Run', '6:15 - 6:45 /km'),
-                const SizedBox(height: 4.0),
-                _buildTrainingPace(context, 'Tempo Run', '5:45 - 6:00 /km'),
-                const SizedBox(height: 4.0),
-                _buildTrainingPace(context, 'Intervals', '5:15 - 5:30 /km'),
-              ],
-            ),
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildZoneRow(
+  Widget _buildInfoRow(
     BuildContext context,
-    String zoneName,
-    String zoneRange,
-    Color zoneColor,
-    bool isThreshold,
+    String label,
+    String value,
+    IconData icon,
   ) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
-      child: Row(
-        children: [
-          // Zone color indicator
-          Container(
-            width: 16.0,
-            height: 16.0,
-            decoration: BoxDecoration(
-              color: zoneColor,
-              borderRadius: BorderRadius.circular(2.0),
-            ),
-          ),
-          
-          const SizedBox(width: 12.0),
-          
-          // Zone name and description
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  zoneName,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: isThreshold ? FontWeight.bold : FontWeight.normal,
-                      ),
-                ),
-                Text(
-                  zoneRange,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.white.withOpacity(0.8),
-                      ),
-                ),
-              ],
-            ),
-          ),
-          
-          // Edit button (for manual mode)
-          if (_manualMode)
-            GlassmorphicButton(
-              opacity: 0.3,
-              blur: 5.0,
-              padding: const EdgeInsets.all(8.0),
-              borderRadius: BorderRadius.circular(4.0),
-              onPressed: () {
-                // Edit zone
-              },
-              child: const Icon(
-                Icons.edit,
-                size: 16.0,
-                color: Colors.white,
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRaceEquivalent(BuildContext context, String distance, String time) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          distance,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-              ),
+        Icon(icon, size: 18.0, color: Colors.white.withValues(alpha: 0.7)),
+        const SizedBox(width: 8.0),
+        Expanded(
+          child: Text(
+            label,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.white.withValues(alpha: 0.7),
+            ),
+          ),
         ),
         Text(
-          time,
+          value,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildTrainingPace(BuildContext context, String type, String pace) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget _buildSocialBenefitsSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          type,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-              ),
+          'Social Benefits',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+
+        const SizedBox(height: 16.0),
+
+        // Benefits grid
+        GridView.count(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisCount: 2,
+          crossAxisSpacing: 16.0,
+          mainAxisSpacing: 16.0,
+          childAspectRatio: 1.3,
+          children: [
+            _buildBenefitCard(
+              context,
+              'Group Creation',
+              'Create groups with up to 5 members',
+              Icons.group,
+              true,
+            ),
+            _buildBenefitCard(
+              context,
+              'Group Analytics',
+              'Track group performance and progress',
+              Icons.analytics,
+              true,
+            ),
+            _buildBenefitCard(
+              context,
+              'Event Creation',
+              'Organize group events and activities',
+              Icons.event,
+              true,
+            ),
+            _buildBenefitCard(
+              context,
+              'Challenge Creation',
+              'Create custom challenges for your group',
+              Icons.emoji_events,
+              true,
+            ),
+            _buildBenefitCard(
+              context,
+              'Custom Routes',
+              'Create and share custom routes',
+              Icons.map,
+              true,
+            ),
+            _buildBenefitCard(
+              context,
+              'Advanced Stats',
+              'Access detailed performance metrics',
+              Icons.bar_chart,
+              true,
+            ),
+            _buildBenefitCard(
+              context,
+              'Leadership Roles',
+              'Assign roles within your group',
+              Icons.admin_panel_settings,
+              false,
+              isLocked: true,
+              unlocksAt: 'Tribe',
+            ),
+            _buildBenefitCard(
+              context,
+              'Custom Branding',
+              'Add unique branding to your group',
+              Icons.brush,
+              false,
+              isLocked: true,
+              unlocksAt: 'Chiefdom',
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBenefitCard(
+    BuildContext context,
+    String title,
+    String description,
+    IconData icon,
+    bool isActive, {
+    bool isLocked = false,
+    String? unlocksAt,
+  }) {
+    return GlassmorphicCard(
+      opacity: isActive ? 0.5 : 0.3,
+      blur: 8.0,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 32.0,
+                color:
+                    isActive
+                        ? Colors.white
+                        : Colors.white.withValues(alpha: 0.5),
+              ),
+              if (isLocked)
+                const Icon(Icons.lock, size: 16.0, color: Colors.white),
+            ],
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              color:
+                  isActive ? Colors.white : Colors.white.withValues(alpha: 0.5),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 4.0),
+          Text(
+            isLocked && unlocksAt != null
+                ? 'Unlocks at $unlocksAt tier'
+                : description,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color:
+                  isActive
+                      ? Colors.white.withValues(alpha: 0.8)
+                      : Colors.white.withValues(alpha: 0.5),
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUpgradePathwaysSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
         Text(
-          pace,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
+          'Upgrade Pathways',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        const SizedBox(height: 16.0),
+
+        GlassmorphicCard(
+          opacity: 0.5,
+          blur: 8.0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Tier Progression',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 16.0),
+
+              // Tier progression visualization
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _buildTierNode(
+                    context,
+                    SocialTier.loneWolf,
+                    false,
+                    isFirst: true,
+                  ),
+                  _buildTierConnector(context, false),
+                  _buildTierNode(context, SocialTier.clan, true),
+                  _buildTierConnector(context, true),
+                  _buildTierNode(context, SocialTier.tribe, false),
+                  _buildTierConnector(context, false),
+                  _buildTierNode(
+                    context,
+                    SocialTier.chiefdom,
+                    false,
+                    isLast: true,
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 16.0),
+
+              // Requirements explanation
+              Text(
+                'Upgrade Requirements',
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall?.copyWith(color: Colors.white),
+              ),
+
+              const SizedBox(height: 8.0),
+
+              _buildRequirementItem(context, '10+ active members', false),
+              _buildRequirementItem(context, '200+ km monthly distance', false),
+              _buildRequirementItem(context, '15+ weekly activities', true),
+
+              const SizedBox(height: 16.0),
+
+              // Timeline
+              Row(
+                children: [
+                  const Icon(Icons.schedule, size: 16.0, color: Colors.white70),
+                  const SizedBox(width: 8.0),
+                  Text(
+                    'Estimated time to Tribe: 3 weeks',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.white70),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTierNode(
+    BuildContext context,
+    SocialTier tier,
+    bool isActive, {
+    bool isFirst = false,
+    bool isLast = false,
+  }) {
+    return Column(
+      children: [
+        Container(
+          width: 40.0,
+          height: 40.0,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color:
+                isActive
+                    ? Colors.white.withValues(alpha: 0.3)
+                    : Colors.white.withValues(alpha: 0.1),
+            border: Border.all(
+              color:
+                  isActive ? Colors.white : Colors.white.withValues(alpha: 0.3),
+              width: 2.0,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              tier.displayName[0],
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color:
+                    isActive
+                        ? Colors.white
+                        : Colors.white.withValues(alpha: 0.5),
                 fontWeight: FontWeight.bold,
               ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 4.0),
+        Text(
+          tier.displayName,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color:
+                isActive ? Colors.white : Colors.white.withValues(alpha: 0.5),
+            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTierConnector(BuildContext context, bool isActive) {
+    return Container(
+      width: 20.0,
+      height: 2.0,
+      color: isActive ? Colors.white : Colors.white.withValues(alpha: 0.3),
+    );
+  }
+
+  Widget _buildRequirementItem(
+    BuildContext context,
+    String text,
+    bool isCompleted,
+  ) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4.0),
+      child: Row(
+        children: [
+          Icon(
+            isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
+            size: 16.0,
+            color:
+                isCompleted
+                    ? Colors.green
+                    : Colors.white.withValues(alpha: 0.6),
+          ),
+          const SizedBox(width: 8.0),
+          Text(
+            text,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCommunityToolsSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Community Building Tools',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        const SizedBox(height: 16.0),
+
+        // Growth dashboard
+        GlassmorphicCard(
+          opacity: 0.5,
+          blur: 8.0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Growth Dashboard',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 12.0),
+
+              // Member recruitment progress
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Member Recruitment',
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(color: Colors.white),
+                      ),
+                      Text(
+                        '8/10',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 8.0),
+
+                  // Progress bar
+                  Stack(
+                    children: [
+                      // Background
+                      Container(
+                        height: 8.0,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                      ),
+
+                      // Progress
+                      Container(
+                        height: 8.0,
+                        width:
+                            MediaQuery.of(context).size.width *
+                            0.8 *
+                            0.76, // 80% of available width (accounting for padding)
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.8),
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 16.0),
+
+              // Invitation system
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Invitation System',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        '3 pending invitations',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.white.withValues(alpha: 0.8),
+                        ),
+                      ),
+                    ],
+                  ),
+                  GlassmorphicButton(
+                    opacity: 0.4,
+                    blur: 5.0,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 6.0,
+                    ),
+                    onPressed: () {
+                      // Invite members
+                    },
+                    child: Text(
+                      'Invite',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 16.0),
+
+              // QR code generator
+              Row(
+                children: [
+                  Container(
+                    width: 80.0,
+                    height: 80.0,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: const Icon(
+                      Icons.qr_code,
+                      size: 50.0,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(width: 16.0),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'QR Invitation Code',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 4.0),
+                        Text(
+                          'Share this code to let others join your community quickly',
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(
+                            color: Colors.white.withValues(alpha: 0.8),
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
+                        Row(
+                          children: [
+                            GlassmorphicButton(
+                              opacity: 0.4,
+                              blur: 5.0,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0,
+                                vertical: 6.0,
+                              ),
+                              onPressed: () {
+                                // Show QR code
+                              },
+                              child: Text(
+                                'Show Code',
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 16.0),
+
+        // Health metrics
+        GlassmorphicCard(
+          opacity: 0.5,
+          blur: 8.0,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Community Health',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 12.0),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildHealthMetric(
+                    context,
+                    'Activity Rate',
+                    '92%',
+                    Icons.directions_run,
+                    Colors.green,
+                  ),
+                  _buildHealthMetric(
+                    context,
+                    'Retention',
+                    '100%',
+                    Icons.people,
+                    Colors.green,
+                  ),
+                  _buildHealthMetric(
+                    context,
+                    'Engagement',
+                    '78%',
+                    Icons.chat_bubble,
+                    Colors.orange,
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 16.0),
+
+              // Weekly health report
+              Row(
+                children: [
+                  const Icon(
+                    Icons.summarize,
+                    size: 18.0,
+                    color: Colors.white70,
+                  ),
+                  const SizedBox(width: 8.0),
+                  Expanded(
+                    child: Text(
+                      'Weekly health report available',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: Colors.white70),
+                    ),
+                  ),
+                  GlassmorphicButton(
+                    opacity: 0.4,
+                    blur: 5.0,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 6.0,
+                    ),
+                    onPressed: () {
+                      // View report
+                    },
+                    child: Text(
+                      'View',
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildHealthMetric(
+    BuildContext context,
+    String label,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
+    return Column(
+      children: [
+        Icon(icon, size: 24.0, color: color),
+        const SizedBox(height: 4.0),
+        Text(
+          value,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            color: Colors.white.withValues(alpha: 0.8),
+          ),
         ),
       ],
     );
   }
 
   Widget _buildActionButtons(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: GlassmorphicButton(
-            opacity: 0.6,
-            blur: 8.0,
-            padding: const EdgeInsets.symmetric(
-              vertical: 12.0,
-            ),
-            onPressed: () {
-              // Save zones
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.save,
-                  size: 18.0,
+        GlassmorphicButton(
+          opacity: 0.6,
+          blur: 8.0,
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          onPressed: () {
+            // Manage subscription
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.settings, size: 18.0, color: Colors.white),
+              const SizedBox(width: 8.0),
+              Text(
+                'Manage Subscription',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(width: 8.0),
-                Text(
-                  'Save',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-        
-        const SizedBox(width: 12.0),
-        
-        Expanded(
-          child: GlassmorphicButton(
-            opacity: 0.4,
-            blur: 5.0,
-            padding: const EdgeInsets.symmetric(
-              vertical: 12.0,
-            ),
-            onPressed: () {
-              // Reset zones
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.refresh,
-                  size: 18.0,
-                  color: Colors.white,
-                ),
-                const SizedBox(width: 8.0),
-                Text(
-                  'Reset',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white,
-                      ),
-                ),
-              ],
-            ),
+
+        const SizedBox(height: 12.0),
+
+        GlassmorphicButton(
+          opacity: 0.4,
+          blur: 5.0,
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          onPressed: () {
+            // View billing history
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.receipt_long, size: 18.0, color: Colors.white),
+              const SizedBox(width: 8.0),
+              Text(
+                'View Billing History',
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.white),
+              ),
+            ],
           ),
         ),
       ],

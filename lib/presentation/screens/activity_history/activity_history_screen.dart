@@ -13,7 +13,7 @@ class ActivityHistoryScreen extends StatefulWidget {
 class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
   final List<String> _filterOptions = ['All', 'Run', 'Walk', 'Bike', 'Hike'];
   String _selectedFilter = 'All';
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,14 +25,11 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.blue.shade600,
-                  Colors.indigo.shade800,
-                ],
+                colors: [Colors.blue.shade600, Colors.indigo.shade800],
               ),
             ),
           ),
-          
+
           // Main content
           SafeArea(
             child: CustomScrollView(
@@ -45,9 +42,9 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                   title: Text(
                     'Activity History',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -62,7 +59,7 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                     ),
                   ],
                 ),
-                
+
                 // Filter section
                 SliverToBoxAdapter(
                   child: Padding(
@@ -70,7 +67,7 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                     child: _buildFilterSection(context),
                   ),
                 ),
-                
+
                 // Activity timeline
                 SliverToBoxAdapter(
                   child: Padding(
@@ -78,7 +75,7 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                     child: _buildTimelineHeader(context, 'This Week'),
                   ),
                 ),
-                
+
                 SliverList(
                   delegate: SliverChildListDelegate([
                     _buildActivityItem(
@@ -107,7 +104,7 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                     ),
                   ]),
                 ),
-                
+
                 // Previous week
                 SliverToBoxAdapter(
                   child: Padding(
@@ -115,7 +112,7 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                     child: _buildTimelineHeader(context, 'Last Week'),
                   ),
                 ),
-                
+
                 SliverList(
                   delegate: SliverChildListDelegate([
                     _buildActivityItem(
@@ -144,11 +141,9 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                     ),
                   ]),
                 ),
-                
+
                 // Bottom spacing
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 24.0),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
               ],
             ),
           ),
@@ -161,45 +156,44 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
     return GlassmorphicCard(
       opacity: 0.6,
       blur: 10.0,
-      padding: const EdgeInsets.symmetric(
-        horizontal: 16.0,
-        vertical: 12.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       child: Column(
         children: [
           // Activity type filter
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: _filterOptions.map((filter) {
-                final isSelected = filter == _selectedFilter;
-                
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: ChoiceChip(
-                    label: Text(filter),
-                    selected: isSelected,
-                    onSelected: (selected) {
-                      if (selected) {
-                        setState(() {
-                          _selectedFilter = filter;
-                        });
-                      }
-                    },
-                    backgroundColor: Colors.white.withOpacity(0.2),
-                    selectedColor: Colors.white.withOpacity(0.4),
-                    labelStyle: TextStyle(
-                      color: Colors.white,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                    ),
-                  ),
-                );
-              }).toList(),
+              children:
+                  _filterOptions.map((filter) {
+                    final isSelected = filter == _selectedFilter;
+
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: ChoiceChip(
+                        label: Text(filter),
+                        selected: isSelected,
+                        onSelected: (selected) {
+                          if (selected) {
+                            setState(() {
+                              _selectedFilter = filter;
+                            });
+                          }
+                        },
+                        backgroundColor: Colors.white.withValues(alpha: 0.2),
+                        selectedColor: Colors.white.withValues(alpha: 0.4),
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                        ),
+                      ),
+                    );
+                  }).toList(),
             ),
           ),
-          
+
           const SizedBox(height: 12.0),
-          
+
           // Advanced filters
           Row(
             children: [
@@ -215,7 +209,7 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                       vertical: 8.0,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Row(
@@ -228,23 +222,20 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                         const SizedBox(width: 4.0),
                         Text(
                           'Last 30 Days',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.white,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(color: Colors.white),
                         ),
                         const Spacer(),
-                        const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.white,
-                        ),
+                        const Icon(Icons.arrow_drop_down, color: Colors.white),
                       ],
                     ),
                   ),
                 ),
               ),
-              
+
               const SizedBox(width: 8.0),
-              
+
               // Sort by
               Expanded(
                 child: GestureDetector(
@@ -257,28 +248,21 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                       vertical: 8.0,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Row(
                       children: [
-                        const Icon(
-                          Icons.sort,
-                          size: 16.0,
-                          color: Colors.white,
-                        ),
+                        const Icon(Icons.sort, size: 16.0, color: Colors.white),
                         const SizedBox(width: 4.0),
                         Text(
                           'Date (Newest)',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.white,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(color: Colors.white),
                         ),
                         const Spacer(),
-                        const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.white,
-                        ),
+                        const Icon(Icons.arrow_drop_down, color: Colors.white),
                       ],
                     ),
                   ),
@@ -299,15 +283,15 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
           Text(
             title,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(width: 8.0),
           Expanded(
             child: Container(
               height: 1.0,
-              color: Colors.white.withOpacity(0.3),
+              color: Colors.white.withValues(alpha: 0.3),
             ),
           ),
         ],
@@ -334,13 +318,14 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ActivityDetailScreen(
-                  type: type,
-                  date: date,
-                  distance: distance,
-                  time: time,
-                  pace: pace,
-                ),
+                builder:
+                    (context) => ActivityDetailScreen(
+                      type: type,
+                      date: date,
+                      distance: distance,
+                      time: time,
+                      pace: pace,
+                    ),
               ),
             );
           },
@@ -355,16 +340,13 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                   height: 40.0,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                   ),
-                  child: const Icon(
-                    Icons.directions_run,
-                    color: Colors.white,
-                  ),
+                  child: const Icon(Icons.directions_run, color: Colors.white),
                 ),
-                
+
                 const SizedBox(width: 16.0),
-                
+
                 // Activity details
                 Expanded(
                   child: Column(
@@ -375,22 +357,26 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                         children: [
                           Text(
                             type,
-                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.titleSmall?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             date,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Colors.white.withOpacity(0.8),
-                                ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodySmall?.copyWith(
+                              color: Colors.white.withValues(alpha: 0.8),
+                            ),
                           ),
                         ],
                       ),
-                      
+
                       const SizedBox(height: 8.0),
-                      
+
                       Row(
                         children: [
                           _buildMetricPill(context, Icons.straighten, distance),
@@ -403,12 +389,9 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
                     ],
                   ),
                 ),
-                
+
                 // Chevron
-                const Icon(
-                  Icons.chevron_right,
-                  color: Colors.white,
-                ),
+                const Icon(Icons.chevron_right, color: Colors.white),
               ],
             ),
           ),
@@ -419,27 +402,20 @@ class _ActivityHistoryScreenState extends State<ActivityHistoryScreen> {
 
   Widget _buildMetricPill(BuildContext context, IconData icon, String value) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-        vertical: 4.0,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Row(
         children: [
-          Icon(
-            icon,
-            size: 12.0,
-            color: Colors.white,
-          ),
+          Icon(icon, size: 12.0, color: Colors.white),
           const SizedBox(width: 4.0),
           Text(
             value,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(color: Colors.white),
           ),
         ],
       ),

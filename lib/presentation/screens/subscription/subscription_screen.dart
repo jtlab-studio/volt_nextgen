@@ -11,8 +11,9 @@ class SubscriptionScreen extends StatefulWidget {
 }
 
 class _SubscriptionScreenState extends State<SubscriptionScreen> {
-  final SocialTier _userTier = SocialTier.clan; // Would normally come from a provider
-  
+  final SocialTier _userTier =
+      SocialTier.clan; // Would normally come from a provider
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,14 +25,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  Colors.blue.shade600,
-                  Colors.purple.shade700,
-                ],
+                colors: [Colors.blue.shade600, Colors.purple.shade700],
               ),
             ),
           ),
-          
+
           // Main content
           SafeArea(
             child: CustomScrollView(
@@ -44,9 +42,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   title: Text(
                     'Subscription',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   leading: IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -61,7 +59,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     ),
                   ],
                 ),
-                
+
                 // Current plan section
                 SliverToBoxAdapter(
                   child: Padding(
@@ -69,7 +67,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     child: _buildCurrentPlanSection(context),
                   ),
                 ),
-                
+
                 // Social benefits
                 SliverToBoxAdapter(
                   child: Padding(
@@ -77,7 +75,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     child: _buildSocialBenefitsSection(context),
                   ),
                 ),
-                
+
                 // Upgrade pathways
                 SliverToBoxAdapter(
                   child: Padding(
@@ -85,7 +83,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     child: _buildUpgradePathwaysSection(context),
                   ),
                 ),
-                
+
                 // Community building tools
                 SliverToBoxAdapter(
                   child: Padding(
@@ -93,7 +91,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     child: _buildCommunityToolsSection(context),
                   ),
                 ),
-                
+
                 // Action buttons
                 SliverToBoxAdapter(
                   child: Padding(
@@ -101,11 +99,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     child: _buildActionButtons(context),
                   ),
                 ),
-                
+
                 // Bottom spacing
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 24.0),
-                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 24.0)),
               ],
             ),
           ),
@@ -132,32 +128,28 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   vertical: 8.0,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
+                  color: Colors.white.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(16.0),
                 ),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.people,
-                      color: Colors.white,
-                      size: 20.0,
-                    ),
+                    const Icon(Icons.people, color: Colors.white, size: 20.0),
                     const SizedBox(width: 8.0),
                     Text(
                       _userTier.displayName,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
               ),
             ],
           ),
-          
+
           const SizedBox(height: 24.0),
-          
+
           // Plan details
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -167,28 +159,28 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   Text(
                     '\$9.99',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     'per month',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white.withOpacity(0.8),
-                        ),
+                      color: Colors.white.withValues(alpha: 0.8),
+                    ),
                   ),
                 ],
               ),
             ],
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Billing info
           Container(
             padding: const EdgeInsets.all(12.0),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Column(
@@ -216,16 +208,16 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               ],
             ),
           ),
-          
+
           const SizedBox(height: 16.0),
-          
+
           // Tier description
           Text(
             _userTier.description,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
         ],
       ),
@@ -240,26 +232,22 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   ) {
     return Row(
       children: [
-        Icon(
-          icon,
-          size: 18.0,
-          color: Colors.white.withOpacity(0.7),
-        ),
+        Icon(icon, size: 18.0, color: Colors.white.withValues(alpha: 0.7)),
         const SizedBox(width: 8.0),
         Expanded(
           child: Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white.withOpacity(0.7),
-                ),
+              color: Colors.white.withValues(alpha: 0.7),
+            ),
           ),
         ),
         Text(
           value,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );
@@ -272,13 +260,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         Text(
           'Social Benefits',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Benefits grid
         GridView.count(
           shrinkWrap: true,
@@ -375,14 +363,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               Icon(
                 icon,
                 size: 32.0,
-                color: isActive ? Colors.white : Colors.white.withOpacity(0.5),
+                color:
+                    isActive
+                        ? Colors.white
+                        : Colors.white.withValues(alpha: 0.5),
               ),
               if (isLocked)
-                const Icon(
-                  Icons.lock,
-                  size: 16.0,
-                  color: Colors.white,
-                ),
+                const Icon(Icons.lock, size: 16.0, color: Colors.white),
             ],
           ),
           const SizedBox(height: 8.0),
@@ -390,9 +377,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             title,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: isActive ? Colors.white : Colors.white.withOpacity(0.5),
-                  fontWeight: FontWeight.bold,
-                ),
+              color:
+                  isActive ? Colors.white : Colors.white.withValues(alpha: 0.5),
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 4.0),
           Text(
@@ -401,8 +389,11 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                 : description,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: isActive ? Colors.white.withOpacity(0.8) : Colors.white.withOpacity(0.5),
-                ),
+              color:
+                  isActive
+                      ? Colors.white.withValues(alpha: 0.8)
+                      : Colors.white.withValues(alpha: 0.5),
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
@@ -418,13 +409,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         Text(
           'Upgrade Pathways',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         GlassmorphicCard(
           opacity: 0.5,
           blur: 8.0,
@@ -434,59 +425,65 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               Text(
                 'Tier Progression',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              
+
               const SizedBox(height: 16.0),
-              
+
               // Tier progression visualization
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildTierNode(context, SocialTier.loneWolf, false, isFirst: true),
+                  _buildTierNode(
+                    context,
+                    SocialTier.loneWolf,
+                    false,
+                    isFirst: true,
+                  ),
                   _buildTierConnector(context, false),
                   _buildTierNode(context, SocialTier.clan, true),
                   _buildTierConnector(context, true),
                   _buildTierNode(context, SocialTier.tribe, false),
                   _buildTierConnector(context, false),
-                  _buildTierNode(context, SocialTier.chiefdom, false, isLast: true),
+                  _buildTierNode(
+                    context,
+                    SocialTier.chiefdom,
+                    false,
+                    isLast: true,
+                  ),
                 ],
               ),
-              
+
               const SizedBox(height: 16.0),
-              
+
               // Requirements explanation
               Text(
                 'Upgrade Requirements',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleSmall?.copyWith(color: Colors.white),
               ),
-              
+
               const SizedBox(height: 8.0),
-              
+
               _buildRequirementItem(context, '10+ active members', false),
               _buildRequirementItem(context, '200+ km monthly distance', false),
               _buildRequirementItem(context, '15+ weekly activities', true),
-              
+
               const SizedBox(height: 16.0),
-              
+
               // Timeline
               Row(
                 children: [
-                  const Icon(
-                    Icons.schedule,
-                    size: 16.0,
-                    color: Colors.white70,
-                  ),
+                  const Icon(Icons.schedule, size: 16.0, color: Colors.white70),
                   const SizedBox(width: 8.0),
                   Text(
                     'Estimated time to Tribe: 3 weeks',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white70,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.white70),
                   ),
                 ],
               ),
@@ -511,11 +508,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           height: 40.0,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isActive
-                ? Colors.white.withOpacity(0.3)
-                : Colors.white.withOpacity(0.1),
+            color:
+                isActive
+                    ? Colors.white.withValues(alpha: 0.3)
+                    : Colors.white.withValues(alpha: 0.1),
             border: Border.all(
-              color: isActive ? Colors.white : Colors.white.withOpacity(0.3),
+              color:
+                  isActive ? Colors.white : Colors.white.withValues(alpha: 0.3),
               width: 2.0,
             ),
           ),
@@ -523,9 +522,12 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             child: Text(
               tier.displayName[0],
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: isActive ? Colors.white : Colors.white.withOpacity(0.5),
-                    fontWeight: FontWeight.bold,
-                  ),
+                color:
+                    isActive
+                        ? Colors.white
+                        : Colors.white.withValues(alpha: 0.5),
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -533,9 +535,10 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         Text(
           tier.displayName,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: isActive ? Colors.white : Colors.white.withOpacity(0.5),
-                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-              ),
+            color:
+                isActive ? Colors.white : Colors.white.withValues(alpha: 0.5),
+            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+          ),
         ),
       ],
     );
@@ -545,11 +548,15 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
     return Container(
       width: 20.0,
       height: 2.0,
-      color: isActive ? Colors.white : Colors.white.withOpacity(0.3),
+      color: isActive ? Colors.white : Colors.white.withValues(alpha: 0.3),
     );
   }
 
-  Widget _buildRequirementItem(BuildContext context, String text, bool isCompleted) {
+  Widget _buildRequirementItem(
+    BuildContext context,
+    String text,
+    bool isCompleted,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4.0),
       child: Row(
@@ -557,14 +564,17 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
           Icon(
             isCompleted ? Icons.check_circle : Icons.radio_button_unchecked,
             size: 16.0,
-            color: isCompleted ? Colors.green : Colors.white.withOpacity(0.6),
+            color:
+                isCompleted
+                    ? Colors.green
+                    : Colors.white.withValues(alpha: 0.6),
           ),
           const SizedBox(width: 8.0),
           Text(
             text,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
         ],
       ),
@@ -578,13 +588,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         Text(
           'Community Building Tools',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Growth dashboard
         GlassmorphicCard(
           opacity: 0.5,
@@ -595,13 +605,13 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               Text(
                 'Growth Dashboard',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              
+
               const SizedBox(height: 12.0),
-              
+
               // Member recruitment progress
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -611,22 +621,22 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     children: [
                       Text(
                         'Member Recruitment',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.white,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(color: Colors.white),
                       ),
                       Text(
                         '8/10',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
-                  
+
                   const SizedBox(height: 8.0),
-                  
+
                   // Progress bar
                   Stack(
                     children: [
@@ -635,17 +645,20 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                         height: 8.0,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(4.0),
                         ),
                       ),
-                      
+
                       // Progress
                       Container(
                         height: 8.0,
-                        width: MediaQuery.of(context).size.width * 0.8 * 0.76, // 80% of available width (accounting for padding)
+                        width:
+                            MediaQuery.of(context).size.width *
+                            0.8 *
+                            0.76, // 80% of available width (accounting for padding)
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.8),
+                          color: Colors.white.withValues(alpha: 0.8),
                           borderRadius: BorderRadius.circular(4.0),
                         ),
                       ),
@@ -653,9 +666,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 16.0),
-              
+
               // Invitation system
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -666,15 +679,15 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       Text(
                         'Invitation System',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         '3 pending invitations',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.white.withOpacity(0.8),
-                            ),
+                          color: Colors.white.withValues(alpha: 0.8),
+                        ),
                       ),
                     ],
                   ),
@@ -691,16 +704,16 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     child: Text(
                       'Invite',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 16.0),
-              
+
               // QR code generator
               Row(
                 children: [
@@ -708,7 +721,7 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     width: 80.0,
                     height: 80.0,
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.2),
+                      color: Colors.white.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: const Icon(
@@ -724,17 +737,21 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                       children: [
                         Text(
                           'QR Invitation Code',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 4.0),
                         Text(
                           'Share this code to let others join your community quickly',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.white.withOpacity(0.8),
-                              ),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(
+                            color: Colors.white.withValues(alpha: 0.8),
+                          ),
                         ),
                         const SizedBox(height: 8.0),
                         Row(
@@ -751,9 +768,8 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                               },
                               child: Text(
                                 'Show Code',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: Colors.white,
-                                    ),
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(color: Colors.white),
                               ),
                             ),
                           ],
@@ -766,9 +782,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
             ],
           ),
         ),
-        
+
         const SizedBox(height: 16.0),
-        
+
         // Health metrics
         GlassmorphicCard(
           opacity: 0.5,
@@ -779,24 +795,42 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
               Text(
                 'Community Health',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              
+
               const SizedBox(height: 12.0),
-              
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildHealthMetric(context, 'Activity Rate', '92%', Icons.directions_run, Colors.green),
-                  _buildHealthMetric(context, 'Retention', '100%', Icons.people, Colors.green),
-                  _buildHealthMetric(context, 'Engagement', '78%', Icons.chat_bubble, Colors.orange),
+                  _buildHealthMetric(
+                    context,
+                    'Activity Rate',
+                    '92%',
+                    Icons.directions_run,
+                    Colors.green,
+                  ),
+                  _buildHealthMetric(
+                    context,
+                    'Retention',
+                    '100%',
+                    Icons.people,
+                    Colors.green,
+                  ),
+                  _buildHealthMetric(
+                    context,
+                    'Engagement',
+                    '78%',
+                    Icons.chat_bubble,
+                    Colors.orange,
+                  ),
                 ],
               ),
-              
+
               const SizedBox(height: 16.0),
-              
+
               // Weekly health report
               Row(
                 children: [
@@ -809,9 +843,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                   Expanded(
                     child: Text(
                       'Weekly health report available',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Colors.white70,
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(color: Colors.white70),
                     ),
                   ),
                   GlassmorphicButton(
@@ -826,9 +860,9 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
                     },
                     child: Text(
                       'View',
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: Colors.white),
                     ),
                   ),
                 ],
@@ -849,24 +883,20 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
   ) {
     return Column(
       children: [
-        Icon(
-          icon,
-          size: 24.0,
-          color: color,
-        ),
+        Icon(icon, size: 24.0, color: color),
         const SizedBox(height: 4.0),
         Text(
           value,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Colors.white.withOpacity(0.8),
-              ),
+            color: Colors.white.withValues(alpha: 0.8),
+          ),
         ),
       ],
     );
@@ -878,57 +908,45 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
         GlassmorphicButton(
           opacity: 0.6,
           blur: 8.0,
-          padding: const EdgeInsets.symmetric(
-            vertical: 12.0,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
           onPressed: () {
             // Manage subscription
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.settings,
-                size: 18.0,
-                color: Colors.white,
-              ),
+              const Icon(Icons.settings, size: 18.0, color: Colors.white),
               const SizedBox(width: 8.0),
               Text(
                 'Manage Subscription',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
         ),
-        
+
         const SizedBox(height: 12.0),
-        
+
         GlassmorphicButton(
           opacity: 0.4,
           blur: 5.0,
-          padding: const EdgeInsets.symmetric(
-            vertical: 12.0,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
           onPressed: () {
             // View billing history
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.receipt_long,
-                size: 18.0,
-                color: Colors.white,
-              ),
+              const Icon(Icons.receipt_long, size: 18.0, color: Colors.white),
               const SizedBox(width: 8.0),
               Text(
                 'View Billing History',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                    ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.white),
               ),
             ],
           ),

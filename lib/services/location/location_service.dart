@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
@@ -28,26 +29,28 @@ final locationAccuracyProvider = Provider<LocationAccuracy>((ref) {
 class LocationService {
   // Stream controllers
   final _locationController = StreamController<LatLng?>.broadcast();
-  final _permissionController = StreamController<LocationPermission>.broadcast();
-  
+  final _permissionController =
+      StreamController<LocationPermission>.broadcast();
+
   // Stream getters
   Stream<LatLng?> get locationUpdates => _locationController.stream;
-  Stream<LocationPermission> get permissionStatus => _permissionController.stream;
-  
+  Stream<LocationPermission> get permissionStatus =>
+      _permissionController.stream;
+
   // Active location subscription
   StreamSubscription<Position>? _positionSubscription;
-  
+
   // Constructor
   LocationService() {
     // Check permission status on init
     _checkPermission();
   }
-  
+
   // Check and request location permissions
   Future<bool> _checkPermission() async {
     bool serviceEnabled;
     LocationPermission permission;
-    
+
     // Test if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -55,7 +58,7 @@ class LocationService {
       _permissionController.add(LocationPermission.denied);
       return false;
     }
-    
+
     // Check location permission
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
@@ -67,34 +70,36 @@ class LocationService {
         return false;
       }
     }
-    
+
     // Permission denied forever
     if (permission == LocationPermission.deniedForever) {
       _permissionController.add(permission);
       return false;
     }
-    
+
     // Permission granted
     _permissionController.add(permission);
     return true;
   }
-  
+
   // Request location permission
   Future<bool> requestPermission() async {
     return await _checkPermission();
   }
-  
+
   // Start tracking location
-  Future<bool> startTracking({LocationAccuracy accuracy = LocationAccuracy.high}) async {
+  Future<bool> startTracking({
+    LocationAccuracy accuracy = LocationAccuracy.high,
+  }) async {
     // Check permission first
     final hasPermission = await _checkPermission();
     if (!hasPermission) {
       return false;
     }
-    
+
     // Stop any existing subscription
     await stopTracking();
-    
+
     // Start new subscription
     _positionSubscription = Geolocator.getPositionStream(
       locationSettings: LocationSettings(
@@ -108,42 +113,44 @@ class LocationService {
         _locationController.add(latLng);
       },
       onError: (error) {
-        print('Location service error: $error');
+        debugPrint('Location service error: $error');
         _locationController.add(null);
       },
     );
-    
+
     return true;
   }
-  
+
   // Stop tracking location
   Future<void> stopTracking() async {
     await _positionSubscription?.cancel();
     _positionSubscription = null;
   }
-  
+
   // Get current location once
-  Future<LatLng?> getCurrentLocation({LocationAccuracy accuracy = LocationAccuracy.high}) async {
+  Future<LatLng?> getCurrentLocation({
+    LocationAccuracy accuracy = LocationAccuracy.high,
+  }) async {
     try {
       // Check permission first
       final hasPermission = await _checkPermission();
       if (!hasPermission) {
         return null;
       }
-      
+
       // Get current position
       final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: accuracy,
+        locationSettings: LocationSettings(accuracy: accuracy),
       );
-      
+
       // Convert to LatLng
       return LatLng(position.latitude, position.longitude);
     } catch (e) {
-      print('Error getting current location: $e');
+      debugPrint('Error getting current location: $e');
       return null;
     }
   }
-  
+
   // Calculate distance between two points in meters
   double calculateDistance(LatLng point1, LatLng point2) {
     return Geolocator.distanceBetween(
@@ -153,22 +160,22 @@ class LocationService {
       point2.longitude,
     );
   }
-  
+
   // Calculate distance of a route (list of points) in kilometers
   double calculateRouteDistance(List<LatLng> points) {
     if (points.length < 2) {
       return 0.0;
     }
-    
+
     double totalDistance = 0.0;
     for (int i = 0; i < points.length - 1; i++) {
       totalDistance += calculateDistance(points[i], points[i + 1]);
     }
-    
+
     // Convert meters to kilometers
     return totalDistance / 1000.0;
   }
-  
+
   // Dispose of resources
   void dispose() {
     stopTracking();
