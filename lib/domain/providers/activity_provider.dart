@@ -4,14 +4,16 @@ import 'package:latlong2/latlong.dart';
 import 'package:uuid/uuid.dart';
 
 // Provider for list of activities
-final activitiesProvider = StateNotifierProvider<ActivityNotifier, List<ActivityModel>>(
-  (ref) => ActivityNotifier(),
-);
+final activitiesProvider =
+    StateNotifierProvider<ActivityNotifier, List<ActivityModel>>(
+      (ref) => ActivityNotifier(),
+    );
 
 // Provider for current activity tracking
-final currentActivityProvider = StateNotifierProvider<CurrentActivityNotifier, ActivityTrackingState>(
-  (ref) => CurrentActivityNotifier(),
-);
+final currentActivityProvider =
+    StateNotifierProvider<CurrentActivityNotifier, ActivityTrackingState>(
+      (ref) => CurrentActivityNotifier(),
+    );
 
 // Provider for activity metrics in real-time
 final activityMetricsProvider = Provider<ActivityMetricsState>((ref) {
@@ -19,7 +21,7 @@ final activityMetricsProvider = Provider<ActivityMetricsState>((ref) {
   if (trackingState.status == ActivityStatus.inactive) {
     return ActivityMetricsState.empty();
   }
-  
+
   return ActivityMetricsState(
     distance: trackingState.distance,
     duration: trackingState.duration,
@@ -52,39 +54,43 @@ class ActivityNotifier extends StateNotifier<List<ActivityModel>> {
 
   // Update an activity
   void updateActivity(ActivityModel updatedActivity) {
-    state = state.map((activity) {
-      if (activity.id == updatedActivity.id) {
-        return updatedActivity;
-      }
-      return activity;
-    }).toList();
+    state =
+        state.map((activity) {
+          if (activity.id == updatedActivity.id) {
+            return updatedActivity;
+          }
+          return activity;
+        }).toList();
   }
 
   // Like an activity
   void toggleLike(String activityId, String userId) {
-    state = state.map((activity) {
-      if (activity.id == activityId) {
-        final likedByUserIds = List<String>.from(activity.likedByUserIds);
-        if (likedByUserIds.contains(userId)) {
-          likedByUserIds.remove(userId);
-        } else {
-          likedByUserIds.add(userId);
-        }
-        return activity.copyWith(likedByUserIds: likedByUserIds);
-      }
-      return activity;
-    }).toList();
+    state =
+        state.map((activity) {
+          if (activity.id == activityId) {
+            final likedByUserIds = List<String>.from(activity.likedByUserIds);
+            if (likedByUserIds.contains(userId)) {
+              likedByUserIds.remove(userId);
+            } else {
+              likedByUserIds.add(userId);
+            }
+            return activity.copyWith(likedByUserIds: likedByUserIds);
+          }
+          return activity;
+        }).toList();
   }
 
   // Add a comment to an activity
   void addComment(String activityId, CommentModel comment) {
-    state = state.map((activity) {
-      if (activity.id == activityId) {
-        final comments = List<CommentModel>.from(activity.comments)..add(comment);
-        return activity.copyWith(comments: comments);
-      }
-      return activity;
-    }).toList();
+    state =
+        state.map((activity) {
+          if (activity.id == activityId) {
+            final comments = List<CommentModel>.from(activity.comments)
+              ..add(comment);
+            return activity.copyWith(comments: comments);
+          }
+          return activity;
+        }).toList();
   }
 
   // Get activities for a specific user
@@ -105,7 +111,8 @@ class ActivityNotifier extends StateNotifier<List<ActivityModel>> {
   // Filter activities by date range
   List<ActivityModel> getActivitiesByDateRange(DateTime start, DateTime end) {
     return state.where((activity) {
-      return activity.startTime.isAfter(start) && activity.startTime.isBefore(end);
+      return activity.startTime.isAfter(start) &&
+          activity.startTime.isBefore(end);
     }).toList();
   }
 
@@ -142,9 +149,7 @@ class ActivityNotifier extends StateNotifier<List<ActivityModel>> {
           // For pace, lower is faster so we invert the comparison
           final aPace = a.duration / a.distance;
           final bPace = b.duration / b.distance;
-          return ascending
-              ? bPace.compareTo(aPace)
-              : aPace.compareTo(bPace);
+          return ascending ? bPace.compareTo(aPace) : aPace.compareTo(bPace);
         });
         break;
     }
@@ -152,12 +157,7 @@ class ActivityNotifier extends StateNotifier<List<ActivityModel>> {
   }
 }
 
-enum ActivitySortBy {
-  date,
-  distance,
-  duration,
-  pace,
-}
+enum ActivitySortBy { date, distance, duration, pace }
 
 class CurrentActivityNotifier extends StateNotifier<ActivityTrackingState> {
   CurrentActivityNotifier() : super(ActivityTrackingState());
@@ -184,7 +184,8 @@ class CurrentActivityNotifier extends StateNotifier<ActivityTrackingState> {
   // Resume a paused activity
   void resumeActivity() {
     if (state.status == ActivityStatus.paused) {
-      final pauseDuration = DateTime.now().difference(state.pauseTime!).inSeconds;
+      final pauseDuration =
+          DateTime.now().difference(state.pauseTime!).inSeconds;
       state = state.copyWith(
         status: ActivityStatus.active,
         pauseTime: null,
@@ -201,7 +202,7 @@ class CurrentActivityNotifier extends StateNotifier<ActivityTrackingState> {
   }) {
     final distance = state.distance;
     final duration = state.duration;
-    
+
     // Create completed activity model
     final completedActivity = ActivityModel(
       id: const Uuid().v4(),
@@ -220,21 +221,30 @@ class CurrentActivityNotifier extends StateNotifier<ActivityTrackingState> {
         elevationData: state.elevationData,
         powerData: state.powerData,
         averageHeartRate: state.avgHeartRate,
-        maxHeartRate: state.heartRateData.isNotEmpty ? state.heartRateData.reduce((a, b) => a > b ? a : b) : null,
+        maxHeartRate:
+            state.heartRateData.isNotEmpty
+                ? state.heartRateData.reduce((a, b) => a > b ? a : b)
+                : null,
         averageCadence: state.avgCadence,
-        maxCadence: state.cadenceData.isNotEmpty ? state.cadenceData.reduce((a, b) => a > b ? a : b) : null,
+        maxCadence:
+            state.cadenceData.isNotEmpty
+                ? state.cadenceData.reduce((a, b) => a > b ? a : b)
+                : null,
         averagePower: state.avgPower,
-        maxPower: state.powerData.isNotEmpty ? state.powerData.reduce((a, b) => a > b ? a : b) : null,
+        maxPower:
+            state.powerData.isNotEmpty
+                ? state.powerData.reduce((a, b) => a > b ? a : b)
+                : null,
         caloriesBurned: state.calories,
       ),
       laps: state.laps,
       likedByUserIds: [],
       comments: [],
     );
-    
+
     // Reset state
     state = ActivityTrackingState();
-    
+
     return completedActivity;
   }
 
@@ -250,46 +260,46 @@ class CurrentActivityNotifier extends StateNotifier<ActivityTrackingState> {
     if (state.status != ActivityStatus.active) {
       return;
     }
-    
+
     // Update distance if provided
-    final newDistance = distanceDelta != null
-        ? state.distance + distanceDelta
-        : state.distance;
-    
+    final newDistance =
+        distanceDelta != null ? state.distance + distanceDelta : state.distance;
+
     // Update GPS trace if new position provided
-    final updatedGpsPoints = newPosition != null
-        ? [...state.gpsPoints, newPosition]
-        : state.gpsPoints;
-    
+    final updatedGpsPoints =
+        newPosition != null
+            ? [...state.gpsPoints, newPosition]
+            : state.gpsPoints;
+
     // Update heart rate data
-    final updatedHeartRateData = heartRate != null
-        ? [...state.heartRateData, heartRate]
-        : state.heartRateData;
-    
+    final updatedHeartRateData =
+        heartRate != null
+            ? [...state.heartRateData, heartRate]
+            : state.heartRateData;
+
     // Update cadence data
-    final updatedCadenceData = cadence != null
-        ? [...state.cadenceData, cadence]
-        : state.cadenceData;
-    
+    final updatedCadenceData =
+        cadence != null ? [...state.cadenceData, cadence] : state.cadenceData;
+
     // Update power data
-    final updatedPowerData = power != null
-        ? [...state.powerData, power]
-        : state.powerData;
-    
+    final updatedPowerData =
+        power != null ? [...state.powerData, power] : state.powerData;
+
     // Update elevation data
-    final updatedElevationData = elevation != null
-        ? [...state.elevationData, elevation]
-        : state.elevationData;
-    
+    final updatedElevationData =
+        elevation != null
+            ? [...state.elevationData, elevation]
+            : state.elevationData;
+
     // Calculate current duration
     final now = DateTime.now();
-    final elapsedSeconds = now.difference(state.startTime).inSeconds - state.totalPauseTime;
-    
+    final elapsedSeconds =
+        now.difference(state.startTime).inSeconds - state.totalPauseTime;
+
     // Calculate current pace (min/km)
-    final currentPaceSeconds = newDistance > 0
-        ? elapsedSeconds / newDistance
-        : 0;
-    
+    final currentPaceSeconds =
+        newDistance > 0 ? elapsedSeconds / newDistance : 0;
+
     // Calculate elevation gain
     double elevationGain = state.elevationGain;
     if (elevation != null && state.elevationData.isNotEmpty) {
@@ -299,28 +309,36 @@ class CurrentActivityNotifier extends StateNotifier<ActivityTrackingState> {
         elevationGain += elevationDelta;
       }
     }
-    
+
     // Calculate calories (very simplified)
-    final calories = (elapsedSeconds / 60) * 10; // ~10 calories per minute
-    
+    final calories =
+        ((elapsedSeconds / 60) * 10)
+            .toDouble(); // ~10 calories per minute, converted to double
+
     // Calculate averages
-    final avgHeartRate = updatedHeartRateData.isNotEmpty
-        ? updatedHeartRateData.reduce((a, b) => a + b) ~/ updatedHeartRateData.length
-        : null;
-    
-    final avgCadence = updatedCadenceData.isNotEmpty
-        ? updatedCadenceData.reduce((a, b) => a + b) ~/ updatedCadenceData.length
-        : null;
-    
-    final avgPower = updatedPowerData.isNotEmpty
-        ? updatedPowerData.reduce((a, b) => a + b) ~/ updatedPowerData.length
-        : null;
-    
+    final avgHeartRate =
+        updatedHeartRateData.isNotEmpty
+            ? updatedHeartRateData.reduce((a, b) => a + b) ~/
+                updatedHeartRateData.length
+            : null;
+
+    final avgCadence =
+        updatedCadenceData.isNotEmpty
+            ? updatedCadenceData.reduce((a, b) => a + b) ~/
+                updatedCadenceData.length
+            : null;
+
+    final avgPower =
+        updatedPowerData.isNotEmpty
+            ? updatedPowerData.reduce((a, b) => a + b) ~/
+                updatedPowerData.length
+            : null;
+
     // Update state
     state = state.copyWith(
       distance: newDistance,
       duration: elapsedSeconds,
-      currentPace: currentPaceSeconds,
+      currentPace: currentPaceSeconds.toDouble(),
       avgPace: newDistance > 0 ? elapsedSeconds / newDistance : 0,
       currentHeartRate: heartRate,
       heartRateData: updatedHeartRateData,
@@ -333,7 +351,7 @@ class CurrentActivityNotifier extends StateNotifier<ActivityTrackingState> {
       avgPower: avgPower,
       elevation: elevation,
       elevationData: updatedElevationData,
-      elevationGain: elevationGain,
+      elevationGain: elevationGain.toDouble(), // Fixed: Convert to double
       gpsPoints: updatedGpsPoints,
       calories: calories.toInt(),
     );
@@ -344,33 +362,44 @@ class CurrentActivityNotifier extends StateNotifier<ActivityTrackingState> {
     if (state.status != ActivityStatus.active) {
       return;
     }
-    
+
     final now = DateTime.now();
-    final totalElapsedSeconds = now.difference(state.startTime).inSeconds - state.totalPauseTime;
-    final previousLapDuration = state.laps.isNotEmpty ? state.laps.last.duration : 0;
+    final totalElapsedSeconds =
+        now.difference(state.startTime).inSeconds - state.totalPauseTime;
+    final previousLapDuration =
+        state.laps.isNotEmpty ? state.laps.last.duration : 0;
     final lapDuration = totalElapsedSeconds - previousLapDuration;
-    
+
     // Calculate lap distance
-    final previousLapDistance = state.laps.isNotEmpty ? state.laps.last.distance : 0.0;
-    final lapDistance = state.distance - previousLapDistance;
-    
+    final previousLapDistance =
+        state.laps.isNotEmpty ? state.laps.last.distance : 0.0;
+    final lapDistance = (state.distance - previousLapDistance).toDouble();
+
     // Calculate lap averages
-    final lapHeartRates = state.heartRateData.skip(state.heartRateData.length - lapDuration).toList();
-    final lapCadences = state.cadenceData.skip(state.cadenceData.length - lapDuration).toList();
-    final lapPowers = state.powerData.skip(state.powerData.length - lapDuration).toList();
-    
-    final avgLapHeartRate = lapHeartRates.isNotEmpty
-        ? lapHeartRates.reduce((a, b) => a + b) ~/ lapHeartRates.length
-        : null;
-    
-    final avgLapCadence = lapCadences.isNotEmpty
-        ? lapCadences.reduce((a, b) => a + b) ~/ lapCadences.length
-        : null;
-    
-    final avgLapPower = lapPowers.isNotEmpty
-        ? lapPowers.reduce((a, b) => a + b) ~/ lapPowers.length
-        : null;
-    
+    final lapHeartRates =
+        state.heartRateData
+            .skip(state.heartRateData.length - lapDuration)
+            .toList();
+    final lapCadences =
+        state.cadenceData.skip(state.cadenceData.length - lapDuration).toList();
+    final lapPowers =
+        state.powerData.skip(state.powerData.length - lapDuration).toList();
+
+    final avgLapHeartRate =
+        lapHeartRates.isNotEmpty
+            ? lapHeartRates.reduce((a, b) => a + b) ~/ lapHeartRates.length
+            : null;
+
+    final avgLapCadence =
+        lapCadences.isNotEmpty
+            ? lapCadences.reduce((a, b) => a + b) ~/ lapCadences.length
+            : null;
+
+    final avgLapPower =
+        lapPowers.isNotEmpty
+            ? lapPowers.reduce((a, b) => a + b) ~/ lapPowers.length
+            : null;
+
     // Create lap data
     final lap = LapData(
       lapNumber: state.laps.length + 1,
@@ -380,11 +409,9 @@ class CurrentActivityNotifier extends StateNotifier<ActivityTrackingState> {
       averageCadence: avgLapCadence,
       averagePower: avgLapPower,
     );
-    
+
     // Add lap to state
-    state = state.copyWith(
-      laps: [...state.laps, lap],
-    );
+    state = state.copyWith(laps: [...state.laps, lap]);
   }
 }
 
@@ -439,14 +466,13 @@ class ActivityTrackingState {
     List<LatLng>? gpsPoints,
     this.calories = 0,
     List<LapData>? laps,
-  }) : 
-    startTime = startTime ?? DateTime.now(),
-    heartRateData = heartRateData ?? [],
-    cadenceData = cadenceData ?? [],
-    powerData = powerData ?? [],
-    elevationData = elevationData ?? [],
-    gpsPoints = gpsPoints ?? [],
-    laps = laps ?? [];
+  }) : startTime = startTime ?? DateTime.now(),
+       heartRateData = heartRateData ?? [],
+       cadenceData = cadenceData ?? [],
+       powerData = powerData ?? [],
+       elevationData = elevationData ?? [],
+       gpsPoints = gpsPoints ?? [],
+       laps = laps ?? [];
 
   ActivityTrackingState copyWith({
     ActivityStatus? status,
@@ -503,11 +529,7 @@ class ActivityTrackingState {
   }
 }
 
-enum ActivityStatus {
-  inactive,
-  active,
-  paused,
-}
+enum ActivityStatus { inactive, active, paused }
 
 class ActivityMetricsState {
   final double distance; // in kilometers
@@ -554,10 +576,10 @@ class ActivityMetricsState {
   // Format pace as MM:SS
   String get formattedPace {
     if (avgPace <= 0) return '--:--';
-    
+
     final minutes = (avgPace / 60).floor();
     final seconds = (avgPace % 60).floor();
-    
+
     return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 
@@ -566,7 +588,7 @@ class ActivityMetricsState {
     final hours = (duration / 3600).floor();
     final minutes = ((duration % 3600) / 60).floor();
     final seconds = (duration % 60);
-    
+
     if (hours > 0) {
       return '$hours:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
     } else {
@@ -725,7 +747,9 @@ List<ActivityModel> _generateSampleActivities() {
           userId: 'user-4',
           userName: 'Mike',
           content: 'Nice long run!',
-          timestamp: DateTime.now().subtract(const Duration(days: 1, hours: 12)),
+          timestamp: DateTime.now().subtract(
+            const Duration(days: 1, hours: 12),
+          ),
         ),
       ],
     ),

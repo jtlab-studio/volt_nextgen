@@ -1,10 +1,6 @@
 import 'package:latlong2/latlong.dart';
 
-enum RouteDifficulty {
-  easy,
-  moderate,
-  hard,
-}
+enum RouteDifficulty { easy, moderate, hard }
 
 extension RouteDifficultyExtension on RouteDifficulty {
   String get displayName {
@@ -19,11 +15,7 @@ extension RouteDifficultyExtension on RouteDifficulty {
   }
 }
 
-enum RoutePrivacy {
-  public,
-  friendsOnly,
-  private,
-}
+enum RoutePrivacy { public, friendsOnly, private }
 
 extension RoutePrivacyExtension on RoutePrivacy {
   String get displayName {
@@ -76,10 +68,10 @@ class RouteModel {
   // Estimated time formatted as HH:MM
   String get estimatedTime {
     if (estimatedDuration == null) return '--:--';
-    
+
     final hours = (estimatedDuration! / 3600).floor();
     final minutes = ((estimatedDuration! % 3600) / 60).floor();
-    
+
     return '${hours > 0 ? '$hours:' : ''}${minutes.toString().padLeft(2, '0')} min';
   }
 
@@ -89,12 +81,13 @@ class RouteModel {
       name: json['name'] as String,
       creatorId: json['creatorId'] as String,
       description: json['description'] as String?,
-      waypoints: (json['waypoints'] as List<dynamic>)
-          .map((e) => LatLng(
-                (e as Map<String, dynamic>)['latitude'] as double,
-                (e as Map<String, dynamic>)['longitude'] as double,
-              ))
-          .toList(),
+      waypoints:
+          (json['waypoints'] as List<dynamic>)
+              .map(
+                (e) =>
+                    LatLng(e['latitude'] as double, e['longitude'] as double),
+              )
+              .toList(),
       distance: json['distance'] as double,
       elevationGain: json['elevationGain'] as double,
       elevationLoss: json['elevationLoss'] as double,
@@ -103,8 +96,13 @@ class RouteModel {
       tags: (json['tags'] as List<dynamic>).map((e) => e as String).toList(),
       surfaceType: json['surfaceType'] as String?,
       estimatedDuration: json['estimatedDuration'] as int?,
-      metadata: RouteMetadata.fromJson(json['metadata'] as Map<String, dynamic>),
-      favoriteByUserIds: (json['favoriteByUserIds'] as List<dynamic>).map((e) => e as String).toList(),
+      metadata: RouteMetadata.fromJson(
+        json['metadata'] as Map<String, dynamic>,
+      ),
+      favoriteByUserIds:
+          (json['favoriteByUserIds'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList(),
     );
   }
 
@@ -114,12 +112,10 @@ class RouteModel {
       'name': name,
       'creatorId': creatorId,
       'description': description,
-      'waypoints': waypoints
-          .map((e) => {
-                'latitude': e.latitude,
-                'longitude': e.longitude,
-              })
-          .toList(),
+      'waypoints':
+          waypoints
+              .map((e) => {'latitude': e.latitude, 'longitude': e.longitude})
+              .toList(),
       'distance': distance,
       'elevationGain': elevationGain,
       'elevationLoss': elevationLoss,
@@ -194,19 +190,24 @@ class RouteMetadata {
   factory RouteMetadata.fromJson(Map<String, dynamic> json) {
     return RouteMetadata(
       createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] != null
-          ? DateTime.parse(json['updatedAt'] as String)
-          : null,
+      updatedAt:
+          json['updatedAt'] != null
+              ? DateTime.parse(json['updatedAt'] as String)
+              : null,
       trafficLevel: json['trafficLevel'] as String,
       safetyRating: json['safetyRating'] as String,
       recommendedTimeOfDay: json['recommendedTimeOfDay'] as String,
-      elevationProfile: (json['elevationProfile'] as List<dynamic>)
-          .map((e) => ElevationPoint.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      elevationProfile:
+          (json['elevationProfile'] as List<dynamic>)
+              .map((e) => ElevationPoint.fromJson(e as Map<String, dynamic>))
+              .toList(),
       completionCount: json['completionCount'] as int,
-      fastestTime: json['fastestTime'] != null
-          ? FastestTime.fromJson(json['fastestTime'] as Map<String, dynamic>)
-          : null,
+      fastestTime:
+          json['fastestTime'] != null
+              ? FastestTime.fromJson(
+                json['fastestTime'] as Map<String, dynamic>,
+              )
+              : null,
     );
   }
 
@@ -250,10 +251,7 @@ class ElevationPoint {
   final double distance; // kilometers from start
   final double elevation; // meters
 
-  ElevationPoint({
-    required this.distance,
-    required this.elevation,
-  });
+  ElevationPoint({required this.distance, required this.elevation});
 
   factory ElevationPoint.fromJson(Map<String, dynamic> json) {
     return ElevationPoint(
@@ -263,10 +261,7 @@ class ElevationPoint {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'distance': distance,
-      'elevation': elevation,
-    };
+    return {'distance': distance, 'elevation': elevation};
   }
 }
 
@@ -287,7 +282,7 @@ class FastestTime {
   String get formattedTime {
     final minutes = (duration / 60).floor();
     final seconds = (duration % 60).floor();
-    
+
     return '$minutes:${seconds.toString().padLeft(2, '0')}';
   }
 

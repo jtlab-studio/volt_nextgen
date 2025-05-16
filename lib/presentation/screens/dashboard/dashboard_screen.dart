@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:volt_nextgen/core/constants/social_tier.dart';
-import 'package:volt_nextgen/presentation/screens/activity/activity_screen.dart';
 import 'package:volt_nextgen/presentation/screens/activity_history/activity_history_screen.dart';
-import 'package:volt_nextgen/presentation/screens/routes/routes_screen.dart';
+import 'package:volt_nextgen/presentation/screens/activity/activity_screen.dart';
+import 'package:volt_nextgen/presentation/screens/routes/route_creation_screen.dart';
 import 'package:volt_nextgen/presentation/screens/social/community_screen.dart';
 import 'package:volt_nextgen/presentation/widgets/activity_card.dart';
 import 'package:volt_nextgen/presentation/widgets/glassmorphic/glassmorphic_button.dart';
@@ -314,6 +314,7 @@ class DashboardScreen extends StatelessWidget {
             isCircular: true,
             padding: EdgeInsets.zero,
             onPressed: () {
+              // Fix for ActivityScreen
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ActivityScreen()),
@@ -353,10 +354,11 @@ class DashboardScreen extends StatelessWidget {
                 'Create Route',
                 Icons.map_rounded,
                 () {
+                  // Fix for RoutesScreen - using RouteCreationScreen instead
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RoutesScreen(),
+                      builder: (context) => const RouteCreationScreen(),
                     ),
                   );
                 },
@@ -544,6 +546,8 @@ class DashboardScreen extends StatelessWidget {
                 '5.8 km',
                 '10 mins ago',
                 '12 likes',
+                'Great run today! Perfect weather for it.',
+                hasImage: true,
               ),
               _buildDivider(),
               _buildFeedItem(
@@ -553,6 +557,8 @@ class DashboardScreen extends StatelessWidget {
                 '4.2 km',
                 '1 hour ago',
                 '8 likes',
+                'Tough intervals today, but feeling stronger!',
+                hasImage: false,
               ),
               _buildDivider(),
               _buildFeedItem(
@@ -562,6 +568,8 @@ class DashboardScreen extends StatelessWidget {
                 '3.5 km',
                 '2 hours ago',
                 '5 likes',
+                'Those hills nearly killed me, but worth it for the views!',
+                hasImage: true,
               ),
             ],
           ),
@@ -598,6 +606,8 @@ class DashboardScreen extends StatelessWidget {
     String distance,
     String timeAgo,
     String likes,
+    String? comment,
+    {bool hasImage = false},
   ) {
     return Padding(
       padding: const EdgeInsets.all(12.0),

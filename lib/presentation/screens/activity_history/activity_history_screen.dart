@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:volt_nextgen/presentation/screens/activity_history/activity_detail_screen.dart';
-import 'package:volt_nextgen/presentation/widgets/activity_card.dart';
 import 'package:volt_nextgen/presentation/widgets/glassmorphic/glassmorphic_card.dart';
 
 class ActivityHistoryScreen extends StatefulWidget {

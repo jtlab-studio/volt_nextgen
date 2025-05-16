@@ -105,7 +105,7 @@ class ActivityModel {
               .map(
                 (e) => LatLng(
                   (e as Map<String, dynamic>)['latitude'],
-                  (e as Map<String, dynamic>)['longitude'],
+                  e['longitude'],
                 ),
               )
               .toList(),

@@ -16,11 +16,11 @@ class AppColors {
 
   // Tier-specific colors
   static const Color loneWolfColor = Color(0xFF808080); // Gray
-  static const Color clanColor = Color(0xFF5E17EB);     // Purple
-  static const Color tribeColor = Color(0xFF30D158);    // Green
+  static const Color clanColor = Color(0xFF5E17EB); // Purple
+  static const Color tribeColor = Color(0xFF30D158); // Green
   static const Color chiefdomColor = Color(0xFFFF9500); // Orange
-  static const Color stateColor = Color(0xFF0A84FF);    // Blue
-  static const Color nationColor = Color(0xFFFF2D55);   // Red
+  static const Color stateColor = Color(0xFF0A84FF); // Blue
+  static const Color nationColor = Color(0xFFFF2D55); // Red
 
   // Get color by tier
   static Color getColorForTier(SocialTier tier) {
@@ -37,8 +37,6 @@ class AppColors {
         return stateColor;
       case SocialTier.nation:
         return nationColor;
-      default:
-        return loneWolfColor;
     }
   }
 
@@ -46,12 +44,12 @@ class AppColors {
   static const Color textPrimary = Color(0xFF000000);
   static const Color textSecondary = Color(0xFF6E6E73);
   static const Color textTertiary = Color(0xFFA8A8AA);
-  
+
   // Text colors for dark mode
   static const Color darkTextPrimary = Color(0xFFFFFFFF);
   static const Color darkTextSecondary = Color(0xFFBBBBBB);
   static const Color darkTextTertiary = Color(0xFF8E8E93);
-  
+
   // Functional colors
   static const Color success = Color(0xFF30D158);
   static const Color warning = Color(0xFFFFD60A);
